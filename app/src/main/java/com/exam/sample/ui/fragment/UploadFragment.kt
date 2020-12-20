@@ -6,26 +6,23 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.exam.sample.BR
+
 import com.exam.sample.R
 import com.exam.sample.common.BaseFragment
 
-import com.exam.sample.databinding.FragmentTrendingBinding
 import com.exam.sample.databinding.FragmentUploadBinding
-import com.exam.sample.viewmodel.MainViewModel
-import com.exam.sample.viewmodel.UploadViewModel
-import org.koin.android.viewmodel.ext.android.viewModel
+import com.exam.sample.viewmodel.FavoriteViewModel
+
+import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
-
-class UploadFragment() : BaseFragment<FragmentUploadBinding, UploadViewModel>() {
+class UploadFragment() : BaseFragment<FragmentUploadBinding, FavoriteViewModel>() {
     override val TAG: String
         get() = this.javaClass.name
     override val layoutResID: Int
         get() = R.layout.fragment_upload
 
-    override val viewModel : UploadViewModel by viewModel()
+    override val viewModel : FavoriteViewModel by sharedViewModel()
 
 
     override fun onCreateView(
