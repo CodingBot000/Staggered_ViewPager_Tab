@@ -1,0 +1,22 @@
+<resources>
+    <string name="app_name">StaggeredSample</string>
+    <string name="plusBtnMsg">Plus 버튼입니다.</string>
+    <string name="msgMore">더봅니다.</string>
+    <string name="msgSend">공유하기</string>
+    <string name="msgError">데이터를 로딩하는데 오류가 발생하였습니다.</string>
+    <string name="detail_middle_msg">Related GIFs</string>
+    <string name="tabNameTrending">Trending</string>
+    <string name="tabNameArtists">Artists</string>
+    <string name="tabNameClips">Clips</string>
+    <string name="tabNameStories">Stories</string>
+    <string name="tabNameStickers">Stickers</string>
+    <string name="tabNameEmoji">Emoji</string>
+    <string name="tabNameFavorite">Favorite</string>
+    <string name="tabNameUpload">Upload</string>
+    <string name="collapseTitle">This is My Name</string>
+    <string name="uploadViewModelText">Upload 예시 입니다.</string>
+    <string name="favorite_check">I like it</string>
+    <string name="favorite_uncheck">I dislike it</string>
+
+    <string name="edttext_hint">Insert Search keyword</string>
+</resources>

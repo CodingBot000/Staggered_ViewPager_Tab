@@ -1,0 +1,30 @@
+package com.exam.sample.utils
+
+import com.exam.sample.R
+
+class Const {
+    companion object  {
+        const val LOG_TAG = "GIPHY_TASK"
+        const val API_KEY = "TXdYkIoK90rIz9Mz3QAIKsKgHyO073Vn"
+        const val BASE_URL = "https://api.giphy.com/v1/"
+
+        const val EXTRA_KEY_INTERACTION = "INTERACTION"
+        const val LIMIT = 15 //The maximum number of objects to return. (Default: “25”)
+        const val OFFSET_DEFAULT = 0  //Specifies the starting position of the results. Defaults to 0.
+        const val EMIT_INTERVAL = 1000L
+
+        const val DB_NAME = "GiphyFavoriteDB.db"
+        const val DB_INSERT = "INSERT"
+        const val DB_DELETE = "DELETE"
+        const val DB_UPDATE = "UPDATE"
+
+
+        val COLORS_RAINBOW = arrayListOf<Int>( R.color.colorRed, R.color.colorOrange, R.color.colorYellow,
+            R.color.colorGreen, R.color.colorBlue, R.color.colorIndigo, R.color.colorPurple)
+
+        var SCREEN_WIDTH = 0F
+        var SCREEN_WIDTH_HALF = 0F
+
+        const val HTTP_LOG = true
+    }
+}

@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:bind="http://schemas.android.com/tools">
+    <data>
+        <variable
+            name="interactionData"
+            type="com.exam.sample.model.data.InteractionData" />
+        <variable
+            name="viewModel"
+            type="com.exam.sample.viewmodel.DetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/colorBlack">
+        <RelativeLayout
+            android:id="@+id/topBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/top_bar_height"
+            android:layout_gravity="bottom"
+            android:padding = "@dimen/margin_padding_10dp"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageButton
+                android:id = "@+id/btnBack"
+                android:layout_width="@dimen/button_title_back"
+                android:layout_height="@dimen/button_title_back"
+                android:layout_centerVertical="true"
+                android:background= "@drawable/btn_back"/>
+            <TextView
+                android:id = "@+id/txtTitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@{interactionData.type}"
+                android:layout_centerInParent="true"
+                style="@style/TextTitleStyle"/>
+
+        </RelativeLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipToPadding="false"
+            android:fillViewport="true"
+            app:layout_constraintTop_toBottomOf="@id/topBar">
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+                <ImageView
+                    android:id = "@+id/imgTop"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/top_img_height"
+                    android:paddingLeft="@dimen/margin_padding_10dp"
+                    android:paddingRight="@dimen/margin_padding_10dp"
+                    android:scaleType="fitCenter"
+                    app:photo="@{interactionData.urlDownSized}"
+                   />
+
+                <include
+                    layout="@layout/detail_middle_view"
+                    android:id="@+id/ll_middleView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imgTop"/>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recyclerView"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@color/colorBlack"
+                    android:layout_below="@id/ll_middleView"/>
+
+            </RelativeLayout>
+        </androidx.core.widget.NestedScrollView>
+        <ProgressBar
+            android:id="@+id/progress"
+            style="@style/ProgressIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+        <com.exam.sample.ui.BottomBarWidget
+            android:id="@+id/bottomBar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/buttons_bottom_height"
+            android:layout_gravity="bottom"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
+
