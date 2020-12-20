@@ -2,7 +2,11 @@
 
 Giphy Api를 활용한 Test Toy Project
 
-MVVM, DataBinding, Koin injection, Room DataBase
+Koin injection
+MVVM, DataBinding 
+LiveData 
+Room DataBase
+
 abstract class BaseActivity
 abstract class BaseFragment
 abstract class BaseViewModel
