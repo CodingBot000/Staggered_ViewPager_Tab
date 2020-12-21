@@ -5,9 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.exam.sample.BR
-import com.exam.sample.viewmodel.BaseViewModel
-import io.reactivex.disposables.CompositeDisposable
 
 abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel>() : AppCompatActivity() {
     lateinit var binding: B

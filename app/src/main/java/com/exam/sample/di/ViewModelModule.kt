@@ -11,6 +11,6 @@ val viewModelModule = module {
     viewModel { DetailViewModel(get()) }
     viewModel { FavoriteViewModel(get()) }
     viewModel { SearchViewModel(get()) }
-    viewModel { UploadViewModel() }
+
 }
 

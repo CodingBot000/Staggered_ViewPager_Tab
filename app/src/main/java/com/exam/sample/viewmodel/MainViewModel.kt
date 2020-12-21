@@ -3,6 +3,7 @@ package com.exam.sample.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.exam.sample.common.BaseViewModel
 import com.exam.sample.model.data.TrendingData
 import com.exam.sample.utils.Resource
 import com.exam.sample.model.repository.trending.TrendingRepository

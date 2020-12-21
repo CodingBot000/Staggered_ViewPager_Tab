@@ -1,11 +1,10 @@
 package com.exam.sample.viewmodel
 
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.exam.sample.common.BaseViewModel
 import com.exam.sample.model.repository.detail.DetailDataRepository
-import com.exam.sample.livedata.SingleLiveEvent
 import com.exam.sample.model.data.DBResultData
 import com.exam.sample.model.data.FavoriteInfo
 import com.exam.sample.model.data.TrendingData

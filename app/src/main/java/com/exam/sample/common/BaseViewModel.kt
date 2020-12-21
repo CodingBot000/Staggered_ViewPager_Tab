@@ -1,4 +1,4 @@
-package com.exam.sample.viewmodel
+package com.exam.sample.common
 
 
 import androidx.lifecycle.LiveData

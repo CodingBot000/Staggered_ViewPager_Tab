@@ -3,8 +3,8 @@ package com.exam.sample.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.exam.sample.common.BaseViewModel
 import com.exam.sample.model.repository.favorite.FavoriteInfoRepository
-import com.exam.sample.livedata.SingleLiveEvent
 import com.exam.sample.model.data.FavoriteInfo
 import com.exam.sample.model.data.TrendingData
 
