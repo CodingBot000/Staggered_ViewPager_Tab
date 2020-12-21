@@ -3,24 +3,20 @@ package com.exam.sample.ui.fragment
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.exam.sample.R
 import com.exam.sample.adapter.StaggeredAdapter
 import com.exam.sample.common.BaseFragment
 
 import com.exam.sample.databinding.FragmentFavoriteBinding
-import com.exam.sample.model.data.FavoriteInfo
 import com.exam.sample.ui.DetailActivity
-import com.exam.sample.utils.Const
 import com.exam.sample.utils.Status
 import com.exam.sample.utils.ToastMsg
-import com.exam.sample.utils.startActivityDetailExtras
+import com.exam.sample.utils.extention.startActivityDetailExtras
 import com.exam.sample.viewmodel.FavoriteViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 

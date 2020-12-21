@@ -5,11 +5,9 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
-import android.util.Log
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
-import android.widget.SearchView
 import android.widget.TextView
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
@@ -18,10 +16,10 @@ import com.exam.sample.R
 import com.exam.sample.adapter.StaggeredAdapter
 import com.exam.sample.common.BaseActivity
 import com.exam.sample.databinding.ActivitySearchBinding
-import com.exam.sample.model.data.DBResultData
-import com.exam.sample.model.data.InteractionData
 import com.exam.sample.model.data.TrendingData
 import com.exam.sample.utils.*
+import com.exam.sample.utils.extention.hideKeyboard
+import com.exam.sample.utils.extention.startActivityDetailExtras
 import com.exam.sample.viewmodel.SearchViewModel
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -69,7 +67,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>()
 
 
     override fun init() {
-
         layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.recyclerView.layoutManager = layoutManager
@@ -77,7 +74,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>()
         binding.recyclerView.adapter = adapter
 
     }
-
 
     override fun initObserver() {
         viewModel.apply {
@@ -87,7 +83,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>()
             })
 
             itemLiveData.observe(this@SearchActivity, Observer {
-
                 when (it.status) {
                     Status.SUCCESS -> {
                         isAddLoadReady = false
@@ -101,7 +96,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>()
             })
 
             itemLiveDataAdd.observe(this@SearchActivity, Observer {
-
                 when (it.status) {
                     Status.SUCCESS -> {
                         isAddLoadReady = false
@@ -113,9 +107,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>()
                     }
                 }
             })
-
         }
-
     }
 
     private fun initList(data : TrendingData) {
@@ -158,7 +150,6 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>()
 
                     viewModel.getSearch(keyword, offset, true)
                     isAddLoadReady = true
-
                 }
             }
         })

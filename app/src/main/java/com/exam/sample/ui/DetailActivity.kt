@@ -2,7 +2,6 @@ package com.exam.sample.ui
 
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -11,11 +10,10 @@ import com.exam.sample.adapter.StaggeredAdapter
 import com.exam.sample.common.BaseActivity
 
 import com.exam.sample.databinding.ActivityDetailBinding
-import com.exam.sample.model.data.DBResultData
 import com.exam.sample.model.data.FavoriteInfo
 import com.exam.sample.model.data.InteractionData
-import com.exam.sample.model.data.TrendingDetail
 import com.exam.sample.utils.*
+import com.exam.sample.utils.extention.startActivityDetailExtras
 import com.exam.sample.viewmodel.DetailViewModel
 import kotlinx.android.synthetic.main.activity_detail.*
 import kotlinx.android.synthetic.main.detail_middle_view.*
@@ -79,7 +77,8 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
             dbDataSuccessEvent.observe(this@DetailActivity, Observer {
                 when (it.status) {
                     Status.SUCCESS -> {
-                        Log.v(Const.LOG_TAG, "${(it.data as DBResultData).flag} $it")
+
+                        LogDebug("${it.data?.flag} $it")
                     }
 
                     Status.ERROR -> {

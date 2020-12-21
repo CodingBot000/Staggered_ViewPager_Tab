@@ -10,8 +10,8 @@ import com.exam.sample.R
 import com.exam.sample.databinding.GridItemBinding
 import com.exam.sample.model.data.TrendingDetail
 import com.exam.sample.utils.Const
-import com.exam.sample.utils.setCellSize
-import com.exam.sample.utils.setRainBowBackgroundColorByPosition
+import com.exam.sample.utils.extention.setCellSize
+import com.exam.sample.utils.extention.setRainBowBackgroundColorByPosition
 import kotlinx.android.synthetic.main.grid_item.view.*
 import java.util.ArrayList
 

@@ -10,7 +10,7 @@ import com.exam.sample.common.BaseActivity
 import com.exam.sample.databinding.ActivityMainBinding
 import com.exam.sample.ui.fragment.*
 import com.exam.sample.utils.Const
-import com.exam.sample.utils.ZoomOutPageTransformer
+import com.exam.sample.utils.animation.ZoomOutPageTransformer
 
 import com.exam.sample.viewmodel.MainViewModel
 import com.google.android.material.tabs.TabLayout
@@ -26,7 +26,7 @@ class MainActivity :  BaseActivity<ActivityMainBinding, MainViewModel>() {
         get() = R.layout.activity_main
 
     override val viewModel : MainViewModel by viewModel()
-    val viewPagerAdapter: ScreenSlideViewPagerAdapter by lazy { ScreenSlideViewPagerAdapter(this) }
+    private val viewPagerAdapter: ScreenSlideViewPagerAdapter by lazy { ScreenSlideViewPagerAdapter(this) }
 
     private val trendingFragment1 = TrendingFragment()
     private val trendingFragment2 = TrendingFragment()

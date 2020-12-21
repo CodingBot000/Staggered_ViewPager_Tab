@@ -16,6 +16,7 @@ import com.exam.sample.databinding.FragmentTrendingBinding
 import com.exam.sample.model.data.TrendingData
 import com.exam.sample.ui.DetailActivity
 import com.exam.sample.utils.*
+import com.exam.sample.utils.extention.startActivityDetailExtras
 import com.exam.sample.viewmodel.MainViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 

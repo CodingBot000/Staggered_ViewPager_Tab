@@ -3,7 +3,10 @@ package com.exam.sample.utils
 import android.annotation.SuppressLint
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import android.os.Build
+import android.util.Log
 import android.widget.Toast
+import androidx.multidex.BuildConfig
 import com.exam.sample.App
 import io.reactivex.Maybe
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -30,3 +33,11 @@ fun ToastMsg(msg:String) {
         Toast.makeText(App.getApplication(), msg, Toast.LENGTH_SHORT).show()
     }
 }
+
+fun LogDebug(msg:String, tag:String = Const.LOG_TAG) {
+    if (BuildConfig.DEBUG) {
+        Log.v(tag, msg)
+    }
+}
+
+fun checkIsMaterialVersion() = Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP
