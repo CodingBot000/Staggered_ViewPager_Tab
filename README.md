@@ -3,19 +3,19 @@
 Giphy Api를 활용한 Test Toy Project
 
 - Library : 
-Koin injection
-MVVM, DataBinding 
-Retrofit, RxJava
-LiveData 
+Koin injection,
+MVVM, DataBinding,
+Retrofit, RxJava,
+LiveData, 
 Room DataBase
 
 - Extends :
-abstract class BaseActivity
-abstract class BaseFragment
+abstract class BaseActivity,
+abstract class BaseFragment,
 abstract class BaseViewModel
 
 - Model Layer :
-Repository
+Repository,
 DataSource
 
 
