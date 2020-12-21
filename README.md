@@ -2,25 +2,22 @@
 
 Giphy Api를 활용한 Test Toy Project
 
+- Library : 
 Koin injection
-
 MVVM, DataBinding 
-
+Retrofit, RxJava
 LiveData 
-
 Room DataBase
 
+- Extends :
 abstract class BaseActivity
-
 abstract class BaseFragment
-
 abstract class BaseViewModel
 
+- Model Layer :
 Repository
-
 DataSource
 
-Retrofit, RxJava
 
 StaggerdGridLayout
 읽어온 이미지들의 사이즈가 제각각이라 StaggeredGrid에 로딩하는데 사이즈를 모두 연산하느라 크기가 마구 변하는 현상을 방지하기 위한 
