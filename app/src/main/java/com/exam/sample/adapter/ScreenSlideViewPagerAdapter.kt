@@ -13,7 +13,6 @@ import androidx.viewpager2.adapter.FragmentStateAdapter
 
 class ScreenSlideViewPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(fa) {
     private val mFragmentList: ArrayList<Fragment> = ArrayList()
-    private val mFragmentTitleList: ArrayList<String> = ArrayList()
 
     override fun getItemCount(): Int = mFragmentList.size
 
@@ -22,9 +21,8 @@ class ScreenSlideViewPagerAdapter(fa: FragmentActivity) : FragmentStateAdapter(f
     }
 
 
-    fun addFragment(fragment: Fragment, title: String) {
+    fun addFragment(fragment: Fragment) {
         mFragmentList.add(fragment)
-        mFragmentTitleList.add(title)
     }
 
 

@@ -40,16 +40,19 @@ class MainActivity :  BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun init() {
         getScreenSize()
-        viewPagerAdapter.addFragment(TrendingFragment(), getString(R.string.tabNameTrending))
-        viewPagerAdapter.addFragment(TrendingFragment(), getString(R.string.tabNameArtists))
-        viewPagerAdapter.addFragment(TrendingFragment(), getString(R.string.tabNameClips))
-        viewPagerAdapter.addFragment(TrendingFragment(), getString(R.string.tabNameStories))
-        viewPagerAdapter.addFragment(TrendingFragment(), getString(R.string.tabNameStickers))
-        viewPagerAdapter.addFragment(TrendingFragment(), getString(R.string.tabNameEmoji))
 
-        pager.adapter = viewPagerAdapter
         val tabTitles = arrayListOf(R.string.tabNameTrending, R.string.tabNameArtists,
             R.string.tabNameClips, R.string.tabNameStories, R.string.tabNameStickers, R.string.tabNameEmoji)
+
+        viewPagerAdapter.addFragment(TrendingFragment())
+        viewPagerAdapter.addFragment(TrendingFragment())
+        viewPagerAdapter.addFragment(TrendingFragment())
+        viewPagerAdapter.addFragment(TrendingFragment())
+        viewPagerAdapter.addFragment(TrendingFragment())
+        viewPagerAdapter.addFragment(TrendingFragment())
+
+        pager.adapter = viewPagerAdapter
+
         TabLayoutMediator(binding.tabLayout, pager) { tab, position ->
             tab.text = getString(tabTitles[position])
             pager.setCurrentItem(tab.position, true)
