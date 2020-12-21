@@ -50,10 +50,11 @@
                 android:background="@color/colorBlack"/>
         </com.google.android.material.appbar.AppBarLayout>
 
-        <androidx.viewpager.widget.ViewPager
+        <androidx.viewpager2.widget.ViewPager2
             android:id="@+id/pager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@color/colorBlack"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
         <ProgressBar
