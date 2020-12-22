@@ -3,6 +3,7 @@ package com.exam.sample.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.exam.sample.App
 import com.exam.sample.common.BaseViewModel
 import com.exam.sample.model.data.TrendingData
 import com.exam.sample.utils.Resource
@@ -18,6 +19,12 @@ class MainViewModel(private val trendingRepository: TrendingRepository) : BaseVi
     private val _itemLiveDataAdd = MutableLiveData<Resource<TrendingData>>()
     val itemLiveDataAdd: LiveData<Resource<TrendingData>> get() = _itemLiveDataAdd
 
+    interface ServiceListener {
+        fun listenerFromService(data : TrendingData)
+    }
+
+    var serviceListener : ServiceListener? = null
+
     fun getTrendingData(offset: Int, isMore : Boolean = false) {
         compositeDisposable.add(
             trendingRepository.requestTrendingData(offset)
@@ -31,8 +38,10 @@ class MainViewModel(private val trendingRepository: TrendingRepository) : BaseVi
                     val res = Resource.success(it)
                     if (isMore)
                         _itemLiveDataAdd.postValue(res)
-                    else
+                    else {
                         _itemLiveData.postValue(res)
+                        serviceListener?.listenerFromService(it)
+                    }
 
                 }, {
                     val res = Resource.error(it.message.toString(), null)

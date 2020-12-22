@@ -3,6 +3,7 @@
     package="com.exam.sample">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.FOREGROUND_SERVICE"/>
 
     <application
         android:name = "com.exam.sample.App"
@@ -27,5 +28,6 @@
             android:name="com.exam.sample.ui.SearchActivity" />
         <activity
             android:name="com.exam.sample.ui.FavoriteActivity" />
+        <service android:name=".service.ServiceDataChangeObserver"/>
     </application>
 </manifest>

@@ -6,7 +6,6 @@ import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.RelativeLayout
 import com.exam.sample.R
-import com.exam.sample.utils.ToastMsg
 import kotlinx.android.synthetic.main.bottombar_view.view.*
 
 class BottomBarWidget : RelativeLayout {

@@ -11,6 +11,7 @@ import com.exam.sample.model.data.InteractionData
 import com.exam.sample.model.data.TrendingDetail
 import com.exam.sample.utils.Const
 import com.exam.sample.utils.checkIsMaterialVersion
+
 import kotlin.math.max
 
 

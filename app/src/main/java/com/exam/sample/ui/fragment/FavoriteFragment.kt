@@ -15,8 +15,9 @@ import com.exam.sample.common.BaseFragment
 import com.exam.sample.databinding.FragmentFavoriteBinding
 import com.exam.sample.ui.DetailActivity
 import com.exam.sample.utils.Status
-import com.exam.sample.utils.ToastMsg
+
 import com.exam.sample.utils.extention.startActivityDetailExtras
+import com.exam.sample.utils.toastMsg
 import com.exam.sample.viewmodel.FavoriteViewModel
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
@@ -67,7 +68,7 @@ class FavoriteFragment() : BaseFragment<FragmentFavoriteBinding, FavoriteViewMod
                 if (it.isNotEmpty())
                     viewModel.getFavoriteInfoRequest(it)
                 else
-                    ToastMsg(R.string.msgError)
+                    toastMsg(R.string.msgError)
             })
 
             isLoading.observe(requireActivity(), Observer {
@@ -82,7 +83,7 @@ class FavoriteFragment() : BaseFragment<FragmentFavoriteBinding, FavoriteViewMod
                     }
 
                     Status.ERROR -> {
-                        ToastMsg(it.message ?: "")
+                        toastMsg(it.message ?: "")
                     }
                 }
             })

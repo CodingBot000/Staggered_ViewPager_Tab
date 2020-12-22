@@ -1,7 +1,9 @@
 package com.exam.sample.ui
 
+import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import androidx.annotation.RequiresApi
 
 import com.exam.sample.R
@@ -40,6 +42,11 @@ class MainActivity :  BaseActivity<ActivityMainBinding, MainViewModel>() {
 
         getScreenSize()
 
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        Log.v(Const.LOG_TAG, "$TAG onNewIntent")
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)

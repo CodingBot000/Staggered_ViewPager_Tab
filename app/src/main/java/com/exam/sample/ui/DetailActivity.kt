@@ -2,6 +2,7 @@ package com.exam.sample.ui
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -78,11 +79,11 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
                 when (it.status) {
                     Status.SUCCESS -> {
 
-                        LogDebug("${it.data?.flag} $it")
+                        Log.v(Const.LOG_TAG, "${it.data?.flag} $it")
                     }
 
                     Status.ERROR -> {
-                        ToastMsg(it.message ?: "")
+                        toastMsg(it.message ?: "")
                     }
                 }
             })
@@ -95,7 +96,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
                     }
 
                     Status.ERROR -> {
-                        ToastMsg(it.message ?: "")
+                        toastMsg(it.message ?: "")
                     }
                 }
             })
@@ -123,7 +124,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
                             interactionData.type
                         )
                     )
-                    ToastMsg(R.string.favorite_check)
+                    toastMsg(R.string.favorite_check)
                 }
                 else {
                     viewModel.removeFavorite(
@@ -133,7 +134,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
                             interactionData.type
                         )
                     )
-                    ToastMsg(R.string.favorite_uncheck)
+                    toastMsg(R.string.favorite_uncheck)
                 }
             }
 
@@ -143,7 +144,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
             }
 
             btnMore.setOnClickListener {
-                ToastMsg(R.string.msgMore)
+                toastMsg(R.string.msgMore)
             }
         }
     }

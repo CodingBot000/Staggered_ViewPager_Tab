@@ -90,7 +90,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>()
                     }
 
                     Status.ERROR -> {
-                        ToastMsg(it.message ?: "")
+                        toastMsg(it.message ?: "")
                     }
                 }
             })
@@ -103,7 +103,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>()
                     }
 
                     Status.ERROR -> {
-                        ToastMsg(it.message ?: "")
+                        toastMsg(it.message ?: "")
                     }
                 }
             })

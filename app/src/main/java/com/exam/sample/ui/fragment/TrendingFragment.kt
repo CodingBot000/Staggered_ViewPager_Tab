@@ -97,7 +97,7 @@ class TrendingFragment() : BaseFragment<FragmentTrendingBinding, MainViewModel>(
                     }
 
                     Status.ERROR -> {
-                        ToastMsg(it.message ?: "")
+                        toastMsg(it.message ?: "")
                     }
                 }
 
@@ -113,7 +113,7 @@ class TrendingFragment() : BaseFragment<FragmentTrendingBinding, MainViewModel>(
                     }
 
                     Status.ERROR -> {
-                        ToastMsg(it.message ?: "")
+                        toastMsg(it.message ?: "")
                     }
                 }
             })

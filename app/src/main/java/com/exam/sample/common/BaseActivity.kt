@@ -1,5 +1,6 @@
 package com.exam.sample.common
 
+
 import android.os.Bundle
 
 import androidx.appcompat.app.AppCompatActivity
@@ -24,6 +25,8 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel>() : AppComp
 
         init()
         initObserver()
+
+
     }
 
     override fun onDestroy() {

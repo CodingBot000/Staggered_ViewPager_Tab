@@ -18,6 +18,10 @@ class Const {
         const val DB_DELETE = "DELETE"
         const val DB_UPDATE = "UPDATE"
 
+        const val NOTI_ID =  1001
+        const val NOTIFICATION_CHANNEL_ID = "10001"
+        const val NOTIFICATION_CHANNEL_NAME = "giphy_new_data"
+        const val DATA_CHANGE_CHECKING_INTERVAL = 20 * 1000.toLong() // 10 seconds
 
         val COLORS_RAINBOW = arrayListOf<Int>( R.color.colorRed, R.color.colorOrange, R.color.colorYellow,
             R.color.colorGreen, R.color.colorBlue, R.color.colorIndigo, R.color.colorPurple)
