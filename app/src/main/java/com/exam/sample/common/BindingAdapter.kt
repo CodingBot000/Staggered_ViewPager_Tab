@@ -16,7 +16,7 @@ import java.util.*
 
 
 @BindingAdapter("photo")
-fun setImage(view: ImageView, url: String){
+fun setImage(view: ImageView, url: String?){
     val index = Random().nextInt(Const.COLORS_RAINBOW.size - 1)
     Glide.with(view)
         .load(url)

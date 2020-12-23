@@ -3,7 +3,7 @@
     <string name="plusBtnMsg">Plus 버튼입니다.</string>
     <string name="msgMore">더봅니다.</string>
     <string name="msgSend">공유하기</string>
-    <string name="msgError">데이터를 로딩하는데 오류가 발생하였습니다.</string>
+    <string name="msgError">data is empty</string>
     <string name="detail_middle_msg">Related GIFs</string>
     <string name="tabNameTrending">Trending</string>
     <string name="tabNameArtists">Artists</string>
