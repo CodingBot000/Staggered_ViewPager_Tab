@@ -25,12 +25,12 @@ abstract class BaseViewModel(): ViewModel() {
     }
 
     protected fun showProgress() {
-        if (App.getLifeCycleApplication() == Lifecycle.Event.ON_RESUME)
+        if (App.getLifeCycleApplication() <= Lifecycle.Event.ON_RESUME)
             _isLoading.value = true
     }
 
     protected fun hideProgress() {
-        if (App.getLifeCycleApplication() == Lifecycle.Event.ON_RESUME)
+        if (App.getLifeCycleApplication() <= Lifecycle.Event.ON_RESUME)
             _isLoading.value = false
     }
 
