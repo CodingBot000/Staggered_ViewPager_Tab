@@ -8,6 +8,7 @@ import com.exam.sample.common.BaseViewModel
 import com.exam.sample.model.data.TrendingData
 import com.exam.sample.utils.Resource
 import com.exam.sample.model.repository.trending.TrendingRepository
+import com.exam.sample.utils.isNetworkConnected
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -26,6 +27,9 @@ class MainViewModel(private val trendingRepository: TrendingRepository) : BaseVi
     var serviceListener : ServiceListener? = null
 
     fun getTrendingData(offset: Int, isMore : Boolean = false) {
+        if (!isNetworkConnected())
+            return
+
         compositeDisposable.add(
             trendingRepository.requestTrendingData(offset)
                 .subscribeOn(Schedulers.io())

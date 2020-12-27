@@ -1,6 +1,5 @@
 package com.exam.sample.service
 
-import android.app.Notification
 import android.app.Service
 import android.content.Intent
 import android.os.IBinder
@@ -57,7 +56,7 @@ class ServiceDataChangeObserver : Service() {
                         Log.v(Const.LOG_TAG, "noti msg NOT equals $debugCnt")
 
                         stopSelf()
-                        ServiceNotification.updateMessage(App.getApplication().getString(R.string.newDataNotiMessage))
+                        DataChangeNotification.updateMessage(App.getApplication().getString(R.string.newDataNotiMessage))
                     }
                 debugCnt++
 
@@ -79,9 +78,9 @@ class ServiceDataChangeObserver : Service() {
 
 
     private fun startForegroundService() {
-        val notification = ServiceNotification.createNotification(this
+        val notiBuild = DataChangeNotification.createNotification(this
             , App.getApplication().getString(R.string.initialNotiMessage))
-        startForeground(Const.NOTI_ID, notification)
+        startForeground(Const.NOTI_ID, notiBuild.build())
 
     }
 

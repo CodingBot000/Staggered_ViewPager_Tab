@@ -14,12 +14,12 @@ import com.exam.sample.ui.MainActivity
 import com.exam.sample.utils.Const
 
 
-object ServiceNotification {
+object DataChangeNotification {
 
     lateinit var notificationBuilder: NotificationCompat.Builder
     lateinit var notificationManager: NotificationManager
 
-    fun createNotification(context: Context, content: String): Notification {
+    fun createNotification(context: Context, content: String): NotificationCompat.Builder {
         val notificationIntent = Intent(context, MainActivity::class.java)
         notificationIntent.action = ServiceActions.START_APP
         notificationIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
@@ -39,7 +39,7 @@ object ServiceNotification {
     //    .setOngoing(true)
         .setVibrate(longArrayOf(100, 200, 300, 400, 500, 400, 300, 200, 400))
         .setContentIntent(pendingIntent)
-        .build()
+//        .build()
 
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -63,7 +63,7 @@ object ServiceNotification {
             notificationManager = context.getSystemService(NotificationManager::class.java)
             notificationManager.createNotificationChannel(serviceChannel)
         }
-        return notificationBuilder.build()
+        return notificationBuilder
     }
 
     fun updateMessage(message: String) {

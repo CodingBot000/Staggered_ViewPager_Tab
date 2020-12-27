@@ -11,6 +11,7 @@ import com.exam.sample.model.data.TrendingData
 import com.exam.sample.utils.Const
 
 import com.exam.sample.utils.Resource
+import com.exam.sample.utils.isNetworkConnected
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -23,6 +24,9 @@ class DetailViewModel(private val detailDataRepository: DetailDataRepository) : 
     val itemLiveData: LiveData<Resource<TrendingData>> get() = _itemLiveData
 
     fun getDetailData(id : String) {
+        if (!isNetworkConnected())
+            return
+
         compositeDisposable.add(
             detailDataRepository.requestDetailData(id)
                 .subscribeOn(Schedulers.io())

@@ -4,9 +4,12 @@ import android.annotation.SuppressLint
 import android.app.ActivityManager
 import android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND
 import android.app.ActivityManager.RunningAppProcessInfo.IMPORTANCE_VISIBLE
+import android.content.Context
 import android.content.Context.ACTIVITY_SERVICE
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import android.net.ConnectivityManager
+import android.net.NetworkInfo
 import android.os.Build
 import android.widget.Toast
 import com.exam.sample.App
@@ -54,4 +57,11 @@ fun toastMsg(msg: String) {
     Maybe.just(0).observeOn(AndroidSchedulers.mainThread()).subscribe {
         Toast.makeText(App.getApplication(), msg, Toast.LENGTH_SHORT).show()
     }
+}
+
+fun isNetworkConnected(): Boolean{
+    val cm = App.getApplication().applicationContext.getSystemService(Context.CONNECTIVITY_SERVICE)  as ConnectivityManager
+    val activeNetwork : NetworkInfo? = cm.activeNetworkInfo
+    val isConnected = activeNetwork != null && activeNetwork.isConnected
+    return isConnected
 }

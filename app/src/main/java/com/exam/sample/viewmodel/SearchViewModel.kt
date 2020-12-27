@@ -7,6 +7,7 @@ import com.exam.sample.common.BaseViewModel
 import com.exam.sample.model.data.TrendingData
 import com.exam.sample.model.repository.search.SearchRepository
 import com.exam.sample.utils.Resource
+import com.exam.sample.utils.isNetworkConnected
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -19,6 +20,9 @@ class SearchViewModel(private val searchRepository: SearchRepository) : BaseView
     val itemLiveDataAdd: LiveData<Resource<TrendingData>> get() = _itemLiveDataAdd
 
     fun getSearch(keyword:String, offset: Int, isMore : Boolean = false) {
+        if (!isNetworkConnected())
+            return
+
         compositeDisposable.add(
             searchRepository.requestSearchData(keyword, offset)
                 .subscribeOn(Schedulers.io())
