@@ -13,6 +13,7 @@ import com.exam.sample.databinding.ActivityMainBinding
 import com.exam.sample.ui.fragment.*
 import com.exam.sample.utils.Const
 import com.exam.sample.utils.animation.ZoomOutPageTransformer
+import com.exam.sample.utils.toastMsg
 
 import com.exam.sample.viewmodel.MainViewModel
 import com.google.android.material.tabs.TabLayout

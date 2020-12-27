@@ -16,6 +16,7 @@ import com.exam.sample.R
 import com.exam.sample.adapter.StaggeredAdapter
 import com.exam.sample.common.BaseActivity
 import com.exam.sample.databinding.ActivitySearchBinding
+import com.exam.sample.livedata.EventObserver
 import com.exam.sample.model.data.TrendingData
 import com.exam.sample.utils.*
 import com.exam.sample.utils.extention.hideKeyboard
@@ -77,12 +78,12 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>()
 
     override fun initObserver() {
         viewModel.apply {
-            isLoading.observe(this@SearchActivity, Observer {
+            isLoading.observe(this@SearchActivity, EventObserver {
                 if (it) binding.progress.visibility = View.VISIBLE else binding.progress.visibility =
                     View.GONE
             })
 
-            itemLiveData.observe(this@SearchActivity, Observer {
+            itemLiveData.observe(this@SearchActivity, EventObserver {
                 when (it.status) {
                     Status.SUCCESS -> {
                         isAddLoadReady = false
@@ -95,7 +96,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>()
                 }
             })
 
-            itemLiveDataAdd.observe(this@SearchActivity, Observer {
+            itemLiveDataAdd.observe(this@SearchActivity, EventObserver {
                 when (it.status) {
                     Status.SUCCESS -> {
                         isAddLoadReady = false

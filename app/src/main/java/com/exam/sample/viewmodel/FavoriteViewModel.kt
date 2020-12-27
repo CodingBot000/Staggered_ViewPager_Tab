@@ -4,6 +4,7 @@ package com.exam.sample.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.exam.sample.common.BaseViewModel
+import com.exam.sample.livedata.Event
 import com.exam.sample.model.repository.favorite.FavoriteInfoRepository
 import com.exam.sample.model.data.FavoriteInfo
 import com.exam.sample.model.data.TrendingData
@@ -15,8 +16,8 @@ import java.lang.StringBuilder
 
 class FavoriteViewModel(private val favoriteInfoRepository: FavoriteInfoRepository) : BaseViewModel()  {
 
-    private val _itemLiveData = MutableLiveData<Resource<TrendingData>>()
-    val itemLiveData: LiveData<Resource<TrendingData>> get() = _itemLiveData
+    private val _itemLiveData = MutableLiveData<Event<Resource<TrendingData>>>()
+    val itemLiveData: LiveData<Event<Resource<TrendingData>>> get() = _itemLiveData
 
     fun getFavoriteInfoRequest(list : List<FavoriteInfo>) {
         if (list.isEmpty())
@@ -37,9 +38,9 @@ class FavoriteViewModel(private val favoriteInfoRepository: FavoriteInfoReposito
                 }
                 .doAfterTerminate { hideProgress() }
                 .subscribe({ it ->
-                    _itemLiveData.postValue(Resource.success(it))
+                    _itemLiveData.postValue(Event(Resource.success(it)))
                 }, {
-                     _itemLiveData.postValue(Resource.error(it.message.toString(), null))
+                     _itemLiveData.postValue(Event(Resource.error(it.message.toString(), null)))
                 })
         )
     }

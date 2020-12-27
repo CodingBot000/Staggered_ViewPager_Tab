@@ -11,6 +11,7 @@ import com.exam.sample.adapter.StaggeredAdapter
 import com.exam.sample.common.BaseActivity
 
 import com.exam.sample.databinding.ActivityDetailBinding
+import com.exam.sample.livedata.EventObserver
 import com.exam.sample.model.data.FavoriteInfo
 import com.exam.sample.model.data.InteractionData
 import com.exam.sample.utils.*
@@ -66,7 +67,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
 
     override fun initObserver() {
         viewModel.apply {
-            isLoading.observe(this@DetailActivity, Observer {
+            isLoading.observe(this@DetailActivity, EventObserver {
                 if (it) binding.progress.visibility = View.VISIBLE else binding.progress.visibility =
                     View.GONE
             })
@@ -75,7 +76,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
                 checkBoxFavorite.isChecked = it != null
             })
 
-            dbDataSuccessEvent.observe(this@DetailActivity, Observer {
+            dbDataSuccessEvent.observe(this@DetailActivity, EventObserver {
                 when (it.status) {
                     Status.SUCCESS -> {
 
@@ -88,7 +89,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
                 }
             })
 
-            itemLiveData.observe(this@DetailActivity, Observer {
+            itemLiveData.observe(this@DetailActivity, EventObserver {
 
                 when (it.status) {
                     Status.SUCCESS -> {

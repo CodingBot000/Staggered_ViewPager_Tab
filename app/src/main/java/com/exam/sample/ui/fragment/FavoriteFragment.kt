@@ -13,6 +13,7 @@ import com.exam.sample.adapter.StaggeredAdapter
 import com.exam.sample.common.BaseFragment
 
 import com.exam.sample.databinding.FragmentFavoriteBinding
+import com.exam.sample.livedata.EventObserver
 import com.exam.sample.ui.DetailActivity
 import com.exam.sample.utils.Status
 
@@ -71,12 +72,12 @@ class FavoriteFragment() : BaseFragment<FragmentFavoriteBinding, FavoriteViewMod
                     toastMsg(R.string.msgError)
             })
 
-            isLoading.observe(requireActivity(), Observer {
+            isLoading.observe(requireActivity(), EventObserver {
                 if (it) binding.progress.visibility = View.VISIBLE else binding.progress.visibility =
                     View.GONE
             })
 
-            itemLiveData.observe(requireActivity(), Observer {
+            itemLiveData.observe(requireActivity(), EventObserver {
                 when (it.status) {
                     Status.SUCCESS -> {
                         it.data?.let { data -> adapter?.initItem(it.data.trendingItems) }

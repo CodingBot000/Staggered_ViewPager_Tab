@@ -4,6 +4,7 @@ package com.exam.sample.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.exam.sample.common.BaseViewModel
+import com.exam.sample.livedata.Event
 import com.exam.sample.model.repository.detail.DetailDataRepository
 import com.exam.sample.model.data.DBResultData
 import com.exam.sample.model.data.FavoriteInfo
@@ -17,11 +18,11 @@ import io.reactivex.schedulers.Schedulers
 
 
 class DetailViewModel(private val detailDataRepository: DetailDataRepository) : BaseViewModel()  {
-    private val _dbDataSuccessEvent = MutableLiveData<Resource<DBResultData>>()
-    val dbDataSuccessEvent: LiveData<Resource<DBResultData>> get() = _dbDataSuccessEvent
+    private val _dbDataSuccessEvent = MutableLiveData<Event<Resource<DBResultData>>>()
+    val dbDataSuccessEvent: LiveData<Event<Resource<DBResultData>>> get() = _dbDataSuccessEvent
 
-    private val _itemLiveData = MutableLiveData<Resource<TrendingData>>()
-    val itemLiveData: LiveData<Resource<TrendingData>> get() = _itemLiveData
+    private val _itemLiveData = MutableLiveData<Event<Resource<TrendingData>>>()
+    val itemLiveData: LiveData<Event<Resource<TrendingData>>> get() = _itemLiveData
 
     fun getDetailData(id : String) {
         if (!isNetworkConnected())
@@ -36,9 +37,9 @@ class DetailViewModel(private val detailDataRepository: DetailDataRepository) : 
                 }
                 .doAfterTerminate { hideProgress() }
                 .subscribe({ it ->
-                    _itemLiveData.postValue(Resource.success(it))
+                    _itemLiveData.postValue(Event(Resource.success(it)))
                 }, {
-                    _itemLiveData.postValue(Resource.error(it.message.toString(), null))
+                    _itemLiveData.postValue(Event(Resource.error(it.message.toString(), null)))
                 })
         )
     }
@@ -53,9 +54,9 @@ class DetailViewModel(private val detailDataRepository: DetailDataRepository) : 
                 }
                 .doAfterTerminate {  }
                 .subscribe({
-                    _dbDataSuccessEvent.postValue(Resource.success(DBResultData(Const.DB_INSERT, true)))
+                    _dbDataSuccessEvent.postValue(Event(Resource.success(DBResultData(Const.DB_INSERT, true))))
                 }, {
-                    _dbDataSuccessEvent.postValue(Resource.error(it.message.toString(), DBResultData(Const.DB_INSERT, false)))
+                    _dbDataSuccessEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(Const.DB_INSERT, false))))
                 })
         )
     }
@@ -70,9 +71,9 @@ class DetailViewModel(private val detailDataRepository: DetailDataRepository) : 
                 }
                 .doAfterTerminate {  }
                 .subscribe({
-                    _dbDataSuccessEvent.postValue(Resource.success(DBResultData(Const.DB_DELETE, true)))
+                    _dbDataSuccessEvent.postValue(Event(Resource.success(DBResultData(Const.DB_DELETE, true))))
                 }, {
-                    _dbDataSuccessEvent.postValue(Resource.error(it.message.toString(), DBResultData(Const.DB_DELETE, false)))
+                    _dbDataSuccessEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(Const.DB_DELETE, false))))
                 })
         )
     }

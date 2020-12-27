@@ -15,7 +15,8 @@ interface ApiService {
     fun getTrendingDataRequest(
         @Query("api_key") apiKey: String,
         @Query("limit") limit: Int,
-        @Query("offset") offset: Int
+        @Query("offset") offset: Int,
+        @Query("rating") rating: String
     ): Single<TrendingData>
 
     @GET("gifs/trending")

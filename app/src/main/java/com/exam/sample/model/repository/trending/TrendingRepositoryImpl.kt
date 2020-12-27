@@ -9,7 +9,7 @@ class TrendingRepositoryImpl(
     private val trendingRemoteDataSource: TrendingRemoteDataSource
 ) : TrendingRepository
 {
-    override fun requestTrendingData(offset: Int): Single<TrendingData> {
-        return trendingRemoteDataSource.requestTrendingData(offset)
+    override fun requestTrendingData(offset: Int, rating: String): Single<TrendingData> {
+        return trendingRemoteDataSource.requestTrendingData(offset, rating)
     }
 }

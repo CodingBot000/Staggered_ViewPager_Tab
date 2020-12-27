@@ -13,6 +13,7 @@ import com.exam.sample.R
 import com.exam.sample.adapter.StaggeredAdapter
 import com.exam.sample.common.BaseFragment
 import com.exam.sample.databinding.FragmentTrendingBinding
+import com.exam.sample.livedata.EventObserver
 import com.exam.sample.model.data.TrendingData
 import com.exam.sample.ui.DetailActivity
 import com.exam.sample.utils.*
@@ -83,7 +84,7 @@ class TrendingFragment() : BaseFragment<FragmentTrendingBinding, MainViewModel>(
     override fun initObserver() {
         viewModel.apply {
 
-            isLoading.observe(requireActivity(), Observer {
+            isLoading.observe(requireActivity(), EventObserver {
                 if (it) binding.progress.visibility = View.VISIBLE else binding.progress.visibility = View.GONE
 
 
@@ -101,7 +102,6 @@ class TrendingFragment() : BaseFragment<FragmentTrendingBinding, MainViewModel>(
                     }
                 }
 
-
             })
 
             itemLiveDataAdd.observe(requireActivity(), Observer {
@@ -117,6 +117,11 @@ class TrendingFragment() : BaseFragment<FragmentTrendingBinding, MainViewModel>(
                     }
                 }
             })
+
+            plusButtonEvent.observe(requireActivity(), Observer {
+                toastMsg(R.string.plusBtnMsg)
+            })
+
         }
     }
 
@@ -160,7 +165,7 @@ class TrendingFragment() : BaseFragment<FragmentTrendingBinding, MainViewModel>(
                     if (offset > totalCnt)
                         offset = totalCnt
 
-                    viewModel.getTrendingData(offset, true)
+                    viewModel.getTrendingData(offset, "", true)
                     isAddLoadReady = true
 
                 }

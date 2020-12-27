@@ -5,5 +5,5 @@ import com.exam.sample.model.data.TrendingData
 import io.reactivex.Single
 
 interface TrendingRepository {
-    fun requestTrendingData(offset: Int): Single<TrendingData>
+    fun requestTrendingData(offset: Int, rating:String): Single<TrendingData>
 }
