@@ -67,7 +67,7 @@ class App : MultiDexApplication() {
                             .getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 	                        notificationManager.cancel(Const.NOTI_ID)    
                         }
-                        
+                        WorkManager.getInstance()?.cancelAllWork()
                     }
 
                     if (event == Lifecycle.Event.ON_STOP) {
