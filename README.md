@@ -23,10 +23,6 @@ DataSource
 다를 경우 notification에 새로운 데이터가 나타났다고 알림을 보여줌.
 
 
-
-* API에 웹페이지 URL도 있어서 WebView 로딩 추가 예정
-
-
 StaggerdGridLayout
 읽어온 이미지들의 사이즈가 제각각이라 StaggeredGrid에 로딩하는데 사이즈를 모두 연산하느라 크기가 마구 변하는 현상을 방지하기 위한 
 API 요청으로 받아온 이미지 Width, Height로 먼저 ImageView의 사이즈를 고정하여 안정적 로딩하도록 하였습니다.
