@@ -18,14 +18,14 @@ abstract class BaseViewModel
 Repository,
 DataSource
 
-* ForegroundService 
-앱을 내리면 바로 startForeground Service . 앱을 종료해도 구동됨. 20초에 한번씩 API call을 해서 이전 데이터와 새로가져온 데이터가 다른지 검사해서
-다를 notification에 새로운 데이터가 나타났다고 알림을 보여주고 Service를 종료함.
-다른 데이터를 포착하기전에 앱을 열어도 서비스 종료함.
+* WorkManager
+15분에 한번씩 API call을 해서 이전 데이터와 새로가져온 데이터가 다른지 검사해서
+다를 경우 notification에 새로운 데이터가 나타났다고 알림을 보여줌.
 
-* WorkManager로 IDLE상태에서만 동작하도록 추가 예정
+
+
 * API에 웹페이지 URL도 있어서 WebView 로딩 추가 예정
-* Service 영원히 끄기 설정 추가 예정
+
 
 StaggerdGridLayout
 읽어온 이미지들의 사이즈가 제각각이라 StaggeredGrid에 로딩하는데 사이즈를 모두 연산하느라 크기가 마구 변하는 현상을 방지하기 위한 
