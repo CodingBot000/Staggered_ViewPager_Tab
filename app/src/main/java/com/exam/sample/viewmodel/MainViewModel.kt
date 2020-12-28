@@ -25,11 +25,13 @@ class MainViewModel(private val trendingRepository: TrendingRepository) : BaseVi
 //    val itemLiveDataAdd: LiveData<Event<Resource<TrendingData>>> get() = _itemLiveDataAdd
 
     // EventObserver를 일부러 사용하지않았음.
-    // 샘플을 ViewPager로 보여주려는데 Giphy Api가 Trending data만 제공해서
-    // TrendingData로 모든 탭을 구성할수밖에 없음. 그런데 EventObserver를 사용하게되면
-    // MainViewModel 을 공유하도록 설정했기때문에
-    // 해당 API는 이미 호출된 대상이기때문에 탭마다 복제해서 재호출을 할수가없어서
-    // 다른곳에서는 EventObserver를 사용했으나 여기서는 일부러 사용하지않음.
+    // 샘플로 ViewPager에서 여러 탭을 보여주려는데 Giphy Api가 Trending data만 제공해서
+    // 같은 API로 여러탭을 쉽게만들기 위해 같은 클래스를 복제함.
+    // 그러므로 ViewModel도 sharedViewModel로 공유함
+    // 그런데 EventObserver를 사용하게되면
+    // 해당 API는 이미 호출된 대상이기때문에 복제된 다른 탭에서는 재호출을 할수가없어서
+    // 보여주기식을 위해 일부러 사용하지않았으며
+    // 다른곳에서는 EventObserver를 사용하였음
     private val _itemLiveData = MutableLiveData<Resource<TrendingData>>()
     val itemLiveData: LiveData<Resource<TrendingData>> get() = _itemLiveData
     private val _itemLiveDataAdd = MutableLiveData<Resource<TrendingData>>()
