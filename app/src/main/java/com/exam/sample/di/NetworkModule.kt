@@ -11,7 +11,6 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 
 val networkModule = module {
-
     single { provideApiService(get()) }
     single { provideRetrofit(get(), Const.BASE_URL) }
     single { provideOkHttpClient() }

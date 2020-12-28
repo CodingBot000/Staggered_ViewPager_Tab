@@ -8,6 +8,9 @@ import org.koin.android.viewmodel.dsl.viewModel
 
 val viewModelModule = module {
     viewModel { MainViewModel(get()) }
+    viewModel { TrendingViewModel(get()) }
+    viewModel { ArtistsViewModel(get()) }
+    viewModel { ClipsViewModel(get()) }
     viewModel { DetailViewModel(get()) }
     viewModel { FavoriteViewModel(get()) }
     viewModel { SearchViewModel(get()) }

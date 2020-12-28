@@ -13,26 +13,27 @@ import com.exam.sample.R
 import com.exam.sample.adapter.StaggeredAdapter
 import com.exam.sample.common.BaseFragment
 import com.exam.sample.common.LoadMoreScrollListener
+import com.exam.sample.databinding.FragmentArtistsBinding
 import com.exam.sample.databinding.FragmentTrendingBinding
 import com.exam.sample.livedata.EventObserver
 import com.exam.sample.model.data.TrendingData
 import com.exam.sample.ui.DetailActivity
 import com.exam.sample.utils.*
 import com.exam.sample.utils.extention.startActivityDetailExtras
+import com.exam.sample.viewmodel.ArtistsViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 import com.exam.sample.viewmodel.MainViewModel
-import com.exam.sample.viewmodel.TrendingViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
-class TrendingFragment  : BaseFragment<FragmentTrendingBinding, TrendingViewModel>(), SwipeRefreshLayout.OnRefreshListener {
+class ArtistsFragment  : BaseFragment<FragmentArtistsBinding, ArtistsViewModel>(), SwipeRefreshLayout.OnRefreshListener {
     override val TAG: String
         get() = this.javaClass.name
     override val layoutResID: Int
-        get() = R.layout.fragment_trending
+        get() = R.layout.fragment_artists
 
-    override val viewModel : TrendingViewModel by viewModel()
+    override val viewModel : ArtistsViewModel by viewModel()
 
     private val adapter: StaggeredAdapter by lazy {
         StaggeredAdapter(itemListClick = { item ->
@@ -43,8 +44,10 @@ class TrendingFragment  : BaseFragment<FragmentTrendingBinding, TrendingViewMode
     private lateinit var layoutManager : StaggeredGridLayoutManager
     private lateinit var loadMoreScrollListener : LoadMoreScrollListener
 
+    private var defaultKey = ""
     private var offset = Const.OFFSET_DEFAULT
     private var isAddLoadReady = false
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,7 +64,6 @@ class TrendingFragment  : BaseFragment<FragmentTrendingBinding, TrendingViewMode
 
     override fun init() {
         binding.swipeLayout.setOnRefreshListener(this)
-        // by lazy로 변수정의와 함께 할당할 경우 열어 탭을 오고가면 already attached오류 발생합니다.
         layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.recyclerView.layoutManager = layoutManager
@@ -77,7 +79,7 @@ class TrendingFragment  : BaseFragment<FragmentTrendingBinding, TrendingViewMode
     override fun onRefresh() {
         offset = Const.OFFSET_DEFAULT
         adapter.clearItem()
-        viewModel.getTrendingData(offset)
+        viewModel.getSearch(defaultKey, offset)
         binding.swipeLayout.isRefreshing = false
     }
 
@@ -87,13 +89,11 @@ class TrendingFragment  : BaseFragment<FragmentTrendingBinding, TrendingViewMode
             isLoading.observe(requireActivity(), EventObserver {
                 if (it) binding.progress.visibility = View.VISIBLE else binding.progress.visibility = View.GONE
 
-
             })
 
             itemLiveData.observe(requireActivity(), EventObserver {
                 when (it.status) {
                     Status.SUCCESS -> {
-                        isAddLoadReady = false
                         it.data?.let { data -> initList(data) }
                     }
 
@@ -105,10 +105,8 @@ class TrendingFragment  : BaseFragment<FragmentTrendingBinding, TrendingViewMode
             })
 
             itemLiveDataAdd.observe(requireActivity(), EventObserver {
-
                 when (it.status) {
                     Status.SUCCESS -> {
-                        isAddLoadReady = false
                         it.data?.let { data -> addList(data) }
                     }
 
@@ -117,15 +115,13 @@ class TrendingFragment  : BaseFragment<FragmentTrendingBinding, TrendingViewMode
                     }
                 }
             })
-
-
-
         }
     }
 
     private fun initData() {
+        defaultKey = getString(Const.TAB_TITLES[1])
         viewModel.apply {
-            getTrendingData(offset)
+            getSearch(defaultKey, offset)
         }
     }
 
@@ -141,6 +137,7 @@ class TrendingFragment  : BaseFragment<FragmentTrendingBinding, TrendingViewMode
         loadMoreScrollListener.setParameters(data.pagination.total_count, isAddLoadReady)
     }
 
+
     private fun initScrollListener() {
         loadMoreScrollListener = LoadMoreScrollListener(
             layoutManager,
@@ -148,7 +145,7 @@ class TrendingFragment  : BaseFragment<FragmentTrendingBinding, TrendingViewMode
                 override fun onLoadMore(page: Int, isAddReady: Boolean) {
                     offset = page
                     isAddLoadReady = isAddReady
-                    viewModel.getTrendingData(offset, "", true)
+                    viewModel.getSearch(defaultKey, offset, true)
                 }
 
             })
@@ -161,7 +158,4 @@ class TrendingFragment  : BaseFragment<FragmentTrendingBinding, TrendingViewMode
         super.onDestroy()
 
     }
-
-
-
 }

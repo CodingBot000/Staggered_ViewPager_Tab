@@ -18,14 +18,12 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 
-class MainViewModel(private val trendingRepository: TrendingRepository) : BaseViewModel()  {
+class TrendingViewModel(private val trendingRepository: TrendingRepository) : BaseViewModel()  {
 
-
-    interface ServiceListener {
-        fun listenerFromService(data : TrendingData)
-    }
-
-    var serviceListener : ServiceListener? = null
+    private val _itemLiveData = MutableLiveData<Event<Resource<TrendingData>>>()
+    val itemLiveData: LiveData<Event<Resource<TrendingData>>> get() = _itemLiveData
+    private val _itemLiveDataAdd = MutableLiveData<Event<Resource<TrendingData>>>()
+    val itemLiveDataAdd: LiveData<Event<Resource<TrendingData>>> get() = _itemLiveDataAdd
 
     fun getTrendingData(offset: Int, rating:String = "", isMore : Boolean = false) {
         if (!isNetworkConnected())
@@ -35,12 +33,22 @@ class MainViewModel(private val trendingRepository: TrendingRepository) : BaseVi
             trendingRepository.requestTrendingData(offset, rating)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe {}
-                .doAfterTerminate {  }
+                .doOnSubscribe { showProgress() }
+                .doAfterTerminate { hideProgress() }
                 .subscribe({ it ->
-                        serviceListener?.listenerFromService(it)
-                }, {
+                    val res = Event(Resource.success(it))
+                    if (isMore)
+                        _itemLiveDataAdd.postValue(res)
+                    else {
+                        _itemLiveData.postValue(res)
+                    }
 
+                }, {
+                    val res = Event(Resource.error(it.message.toString(), null))
+                    if (isMore)
+                        _itemLiveDataAdd.postValue(res)
+                    else
+                        _itemLiveData.postValue(res)
                 })
         )
     }

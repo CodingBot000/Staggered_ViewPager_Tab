@@ -5,7 +5,7 @@
     <data>
         <variable
             name="viewModel"
-            type="com.exam.sample.viewmodel.TrendingViewModel" />
+            type="com.exam.sample.viewmodel.ArtistsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

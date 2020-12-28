@@ -20,6 +20,7 @@ import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
+import kotlin.system.measureTimeMillis
 
 
 class MainActivity :  BaseActivity<ActivityMainBinding, MainViewModel>() {
@@ -31,12 +32,10 @@ class MainActivity :  BaseActivity<ActivityMainBinding, MainViewModel>() {
     override val viewModel : MainViewModel by viewModel()
     private val viewPagerAdapter: ScreenSlideViewPagerAdapter by lazy { ScreenSlideViewPagerAdapter(this) }
 
-    private val trendingFragment1 = TrendingFragment()
-    private val trendingFragment2 = TrendingFragment()
-    private val trendingFragment3 = TrendingFragment()
-    private val trendingFragment4 = TrendingFragment()
-    private val trendingFragment5 = TrendingFragment()
-    private val trendingFragment6 = TrendingFragment()
+    private val trendingFragment = TrendingFragment()
+    private val artistsFragment = ArtistsFragment()
+    private val clipsFragment = ClipsFragment()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,22 +53,19 @@ class MainActivity :  BaseActivity<ActivityMainBinding, MainViewModel>() {
     override fun init() {
         getScreenSize()
 
-        val tabTitles = arrayListOf(R.string.tabNameTrending, R.string.tabNameArtists,
-            R.string.tabNameClips, R.string.tabNameStories, R.string.tabNameStickers, R.string.tabNameEmoji)
 
-        viewPagerAdapter.addFragment(trendingFragment1)
-        viewPagerAdapter.addFragment(trendingFragment2)
-        viewPagerAdapter.addFragment(trendingFragment3)
-        viewPagerAdapter.addFragment(trendingFragment4)
-        viewPagerAdapter.addFragment(trendingFragment5)
-        viewPagerAdapter.addFragment(trendingFragment6)
+
+        viewPagerAdapter.addFragment(trendingFragment)
+        viewPagerAdapter.addFragment(artistsFragment)
+        viewPagerAdapter.addFragment(clipsFragment)
+
 
 //        pager.setPageTransformer(DepthPageTransformer())
         pager.setPageTransformer(ZoomOutPageTransformer())
         pager.adapter = viewPagerAdapter
 
         TabLayoutMediator(binding.tabLayout, pager) { tab, position ->
-            tab.text = getString(tabTitles[position])
+            tab.text = getString(Const.TAB_TITLES[position])
             pager.setCurrentItem(tab.position, true)
         }.attach()
 

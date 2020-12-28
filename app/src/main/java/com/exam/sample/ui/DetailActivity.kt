@@ -90,7 +90,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
             })
 
             itemLiveData.observe(this@DetailActivity, EventObserver {
-
                 when (it.status) {
                     Status.SUCCESS -> {
                         it.data?.let { data -> adapter.initItem(it.data.trendingItems) }
