@@ -24,11 +24,14 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.exam.sample.ui.DetailActivity" />
+            android:name="com.exam.sample.ui.DetailActivity"
+            android:screenOrientation="portrait"/>
         <activity
-            android:name="com.exam.sample.ui.SearchActivity" />
+            android:name="com.exam.sample.ui.SearchActivity"
+            android:screenOrientation="portrait"/>
         <activity
-            android:name="com.exam.sample.ui.FavoriteActivity" />
+            android:name="com.exam.sample.ui.FavoriteActivity"
+            android:screenOrientation="portrait"/>
         <service android:name=".service.ServiceDataChangeObserver"/>
     </application>
 </manifest>
