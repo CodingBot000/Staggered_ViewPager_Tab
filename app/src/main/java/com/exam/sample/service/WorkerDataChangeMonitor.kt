@@ -21,7 +21,7 @@ class WorkerDataChangeMonitor : Worker(), KoinComponent, MainViewModel.ServiceLi
     override fun doWork(): Result {
         Log.d(Const.LOG_TAG, "WorkerDataChangeObserver doWork")
         viewModel.serviceListener = this
-        viewModel.getTrendingData(0)
+        viewModel.getDataFromBackground(0)
 
         return Result.SUCCESS
     }

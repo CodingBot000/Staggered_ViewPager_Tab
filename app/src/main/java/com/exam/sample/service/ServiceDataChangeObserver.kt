@@ -100,7 +100,7 @@ class ServiceDataChangeObserver : Service() {
         }
 
         override fun run() {
-            viewModel.getTrendingData(0)
+            viewModel.getDataFromBackground(0)
             toastMsg("request API for searching change data in Background ${getDateTime()}")
             Log.v(Const.LOG_TAG, "getDateTime()  ${getDateTime()}")
         }

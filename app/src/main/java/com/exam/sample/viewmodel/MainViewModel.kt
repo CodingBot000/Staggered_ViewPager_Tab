@@ -27,14 +27,13 @@ class MainViewModel(private val trendingRepository: TrendingRepository) : BaseVi
 
     var serviceListener : ServiceListener? = null
 
-    fun getTrendingData(offset: Int, rating:String = "", isMore : Boolean = false) {
+    fun getDataFromBackground(offset: Int, rating:String = "", isMore : Boolean = false) {
         if (!isNetworkConnected())
             return
 
         compositeDisposable.add(
             trendingRepository.requestTrendingData(offset, rating)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .doOnSubscribe {}
                 .doAfterTerminate {  }
                 .subscribe({ it ->
