@@ -118,9 +118,7 @@ class TrendingFragment() : BaseFragment<FragmentTrendingBinding, MainViewModel>(
                 }
             })
 
-            plusButtonEvent.observe(requireActivity(), Observer {
-                toastMsg(R.string.plusBtnMsg)
-            })
+
 
         }
     }
