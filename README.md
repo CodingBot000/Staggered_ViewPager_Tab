@@ -27,7 +27,8 @@ StaggerdGridLayout
 읽어온 이미지들의 사이즈가 제각각이라 StaggeredGrid에 로딩하는데 사이즈를 모두 연산하느라 크기가 마구 변하는 현상을 방지하기 위한 
 API 요청으로 받아온 이미지 Width, Height로 먼저 ImageView의 사이즈를 고정하여 안정적 로딩하도록 하였습니다.
 
-![Alt text](/../<branch name>/path/to/image.png?raw=true "Optional Title")
+
+![Alt text](https://github.com/CodingBot000/Staggered_ViewPager_Tab/blob/main/GiphyTestApp.jpg?raw=true)
 [전체 구조도 요약]
 
 
