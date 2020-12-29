@@ -5,6 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.exam.sample.App
 import com.exam.sample.R
+import com.exam.sample.common.BaseSearchViewModel
 import com.exam.sample.common.BaseViewModel
 import com.exam.sample.livedata.Event
 import com.exam.sample.livedata.SingleLiveEvent
@@ -18,42 +19,11 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 
-class ClipsViewModel(private val searchRepository: SearchRepository) : BaseViewModel()  {
-
-    private val _itemLiveData = MutableLiveData<Event<Resource<TrendingData>>>()
-    val itemLiveData: LiveData<Event<Resource<TrendingData>>> get() = _itemLiveData
-    private val _itemLiveDataAdd = MutableLiveData<Event<Resource<TrendingData>>>()
-    val itemLiveDataAdd: LiveData<Event<Resource<TrendingData>>> get() = _itemLiveDataAdd
+class ClipsViewModel(private val searchRepository: SearchRepository) : BaseSearchViewModel()  {
 
     fun getSearch(keyword:String, offset: Int, isMore : Boolean = false) {
-        if (!isNetworkConnected())
-            return
-
-        compositeDisposable.add(
-            searchRepository.requestSearchData(keyword, offset)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe {
-                    showProgress()
-                }
-                .doAfterTerminate { hideProgress() }
-                .subscribe({ it ->
-                    val res = Event(Resource.success(it))
-                    if (isMore)
-                        _itemLiveDataAdd.postValue(res)
-                    else
-                        _itemLiveData.postValue(res)
-
-                }, {
-                    val res = Event(Resource.error(it.message.toString(), null))
-                    if (isMore)
-                        _itemLiveDataAdd.postValue(res)
-                    else
-                        _itemLiveData.postValue(res)
-                })
-        )
+        getSearch(searchRepository, keyword, offset, isMore)
     }
-
 
     override fun onCleared() {
         super.onCleared()

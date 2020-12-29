@@ -49,7 +49,6 @@ class LoadMoreScrollListener(
                 offset = totalCnt
 
             scrollLoadMoreListener?.onLoadMore(offset, isAddReady)
-//            viewModel.getSearch(getString(Const.TAB_TITLES[1]), offset, true)
 
             isAddReady = true
 
