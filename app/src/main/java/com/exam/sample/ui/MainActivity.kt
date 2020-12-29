@@ -39,9 +39,6 @@ class MainActivity :  BaseActivity<ActivityMainBinding, MainViewModel>() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        getScreenSize()
-
     }
 
     override fun onNewIntent(intent: Intent?) {
@@ -52,8 +49,6 @@ class MainActivity :  BaseActivity<ActivityMainBinding, MainViewModel>() {
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun init() {
         getScreenSize()
-
-
 
         viewPagerAdapter.addFragment(trendingFragment)
         viewPagerAdapter.addFragment(artistsFragment)
