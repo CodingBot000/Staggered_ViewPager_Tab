@@ -28,6 +28,12 @@ class LoadMoreScrollListener(
         totalCnt = totalItems
         isAddReady = isAddLoadReady
     }
+
+    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+        super.onScrollStateChanged(recyclerView, newState)
+        scrollLoadMoreListener?.onScrollStateChanged(recyclerView, newState)
+    }
+
     override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
         super.onScrolled(recyclerView, dx, dy)
 
@@ -57,5 +63,6 @@ class LoadMoreScrollListener(
 
     interface ScrollLoadMoreListener {
         fun onLoadMore(page: Int, isAddReady: Boolean)
+        fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int)
     }
 }

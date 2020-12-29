@@ -19,11 +19,13 @@ import com.exam.sample.livedata.EventObserver
 import com.exam.sample.model.data.TrendingData
 import com.exam.sample.ui.DetailActivity
 import com.exam.sample.utils.*
+import com.exam.sample.utils.extention.hideKeyboard
 import com.exam.sample.utils.extention.startActivityDetailExtras
 import com.exam.sample.viewmodel.ArtistsViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 import com.exam.sample.viewmodel.MainViewModel
+import kotlinx.android.synthetic.main.activity_search.*
 import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
@@ -148,7 +150,11 @@ class ArtistsFragment  : BaseFragment<FragmentArtistsBinding, ArtistsViewModel>(
                     viewModel.getSearch(defaultKey, offset, true)
                 }
 
-            })
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) { }
+
+            }
+
+        )
 
         binding.recyclerView.addOnScrollListener(loadMoreScrollListener)
 

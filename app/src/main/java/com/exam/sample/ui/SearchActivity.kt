@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.exam.sample.R
 import com.exam.sample.adapter.StaggeredAdapter
 import com.exam.sample.common.BaseActivity
+import com.exam.sample.common.LoadMoreScrollListener
 import com.exam.sample.databinding.ActivitySearchBinding
 import com.exam.sample.livedata.EventObserver
 import com.exam.sample.model.data.TrendingData
@@ -47,13 +48,10 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>()
         })
     }
     private lateinit var layoutManager : StaggeredGridLayoutManager
-    private var totalCnt = 0
+    private lateinit var loadMoreScrollListener : LoadMoreScrollListener
+
     private var offset = Const.OFFSET_DEFAULT
     private var isAddLoadReady = false
-    private var isFirstLoad = true
-    private var visibleThreshold = Const.LIMIT
-    private var lastVisibleItem = 0
-    private var totalItemCount = 0
     private var keyword:String = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -113,47 +111,34 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>()
 
     private fun initList(data : TrendingData) {
         adapter.initItem(data.trendingItems)
-        totalCnt = data.pagination.total_count
+        loadMoreScrollListener.setParameters(data.pagination.total_count, isAddLoadReady)
         isAddLoadReady = false
     }
 
     private fun addList(data : TrendingData) {
         adapter.addItem(data.trendingItems)
-        totalCnt = data.pagination.total_count
+        loadMoreScrollListener.setParameters(data.pagination.total_count, isAddLoadReady)
         isAddLoadReady = false
     }
 
     private fun initScrollListener() {
-        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                super.onScrollStateChanged(recyclerView, newState)
-                edtSearch.hideKeyboard()
-            }
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                super.onScrolled(recyclerView, dx, dy)
-
-                totalItemCount = layoutManager.itemCount
-                lastVisibleItem = layoutManager.findLastCompletelyVisibleItemPositions(null)[1]
-
-                if (!isAddLoadReady && totalItemCount <= (lastVisibleItem + visibleThreshold)) {
-                    if (isFirstLoad) {
-                        isFirstLoad = false
-                        return
-                    }
-
-                    if (offset >= totalCnt)
-                        return
-
-                    offset += Const.LIMIT
-
-                    if (offset > totalCnt)
-                        offset = totalCnt
-
+        loadMoreScrollListener = LoadMoreScrollListener(
+            layoutManager,
+            object : LoadMoreScrollListener.ScrollLoadMoreListener {
+                override fun onLoadMore(page: Int, isAddReady: Boolean) {
+                    offset = page
+                    isAddLoadReady = isAddReady
                     viewModel.getSearch(keyword, offset, true)
-                    isAddLoadReady = true
                 }
-            }
-        })
+
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                    edtSearch.hideKeyboard()
+                }
+
+            })
+
+        binding.recyclerView.addOnScrollListener(loadMoreScrollListener)
+
     }
 
     @SuppressLint("CheckResult")

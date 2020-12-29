@@ -151,6 +151,8 @@ class TrendingFragment  : BaseFragment<FragmentTrendingBinding, TrendingViewMode
                     viewModel.getTrendingData(offset, "", true)
                 }
 
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) { }
+
             })
 
         binding.recyclerView.addOnScrollListener(loadMoreScrollListener)

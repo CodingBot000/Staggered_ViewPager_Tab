@@ -153,6 +153,7 @@ class ClipsFragment  : BaseFragment<FragmentClipsBinding, ClipsViewModel>(), Swi
                     viewModel.getSearch(defaultKey, offset, true)
                 }
 
+                override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) { }
             })
 
         binding.recyclerView.addOnScrollListener(loadMoreScrollListener)
