@@ -83,7 +83,10 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
                         if (it.data?.flag == Const.DB_SELECT) {
                             checkBoxFavorite.isChecked = it.data.data != null
                         } else {
-                            Log.v(Const.LOG_TAG, "${it.data?.flag} $it")
+                            if (it.data?.flag == Const.DB_INSERT)
+                                makeSnackBar(R.string.favorite_check, R.string.favorite_uncheck)
+                            else
+                                makeSnackBar(R.string.favorite_uncheck, R.string.favorite_check)
                         }
                     }
 
@@ -139,7 +142,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
                         )
                     )
 
-                    makeSnackBar(R.string.favorite_check, R.string.favorite_uncheck)
+//                    makeSnackBar(R.string.favorite_check, R.string.favorite_uncheck)
                 }
                 else {
                     viewModel.removeFavorite(
@@ -149,7 +152,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
                             interactionData.type
                         )
                     )
-                    makeSnackBar(R.string.favorite_uncheck, R.string.favorite_check)
+//                    makeSnackBar(R.string.favorite_uncheck, R.string.favorite_check)
                 }
             }
 
