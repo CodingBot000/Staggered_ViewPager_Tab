@@ -11,10 +11,10 @@ import io.reactivex.Single
 @Dao
 interface FavoriteDao {
     @Query("SELECT * FROM TABLE_FAVORITE")
-    fun getAll(): LiveData<List<FavoriteInfo>>
+    fun getAll(): Single<List<FavoriteInfo>>
 
     @Query("SELECT * FROM TABLE_FAVORITE where userId = :userId")
-    fun getData(userId : String) : LiveData<FavoriteInfo>
+    fun getData(userId : String) : Single<FavoriteInfo>
 
     @Update
     fun update(favoriteInfo : FavoriteInfo) : Completable

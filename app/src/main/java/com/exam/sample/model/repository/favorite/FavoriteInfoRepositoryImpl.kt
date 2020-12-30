@@ -19,11 +19,11 @@ class FavoriteInfoRepositoryImpl(
         return favoriteInfoRemoteDataSource.requestGIFsByIds(idsList)
     }
 
-    override fun getFavoriteAllDB(): LiveData<List<FavoriteInfo>> {
+    override fun getFavoriteAllDB(): Single<List<FavoriteInfo>> {
         return favoriteInfoLocalDataSource.getInfoAll()
     }
 
-    override fun getFavoriteDB(userId: String): LiveData<FavoriteInfo> {
+    override fun getFavoriteDB(userId: String): Single<FavoriteInfo> {
         return favoriteInfoLocalDataSource.getInfo(userId)
     }
 

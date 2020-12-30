@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.View
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import androidx.room.EmptyResultSetException
 import com.exam.sample.R
 import com.exam.sample.adapter.StaggeredAdapter
 import com.exam.sample.common.BaseActivity
@@ -76,19 +77,23 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
                     View.GONE
             })
 
-            getFavorite(interactionData.userId).observe(this@DetailActivity, Observer {
-                checkBoxFavorite.isChecked = it != null
-            })
-
             dbDataSuccessEvent.observe(this@DetailActivity, EventObserver {
                 when (it.status) {
                     Status.SUCCESS -> {
-
-                        Log.v(Const.LOG_TAG, "${it.data?.flag} $it")
+                        if (it.data?.flag == Const.DB_SELECT) {
+                            checkBoxFavorite.isChecked = it.data.data != null
+                        } else {
+                            Log.v(Const.LOG_TAG, "${it.data?.flag} $it")
+                        }
                     }
 
                     Status.ERROR -> {
-                        toastMsg(it.message ?: "")
+                        if (it.data?.data is EmptyResultSetException) {
+                            Log.v(Const.LOG_TAG, "Query returned Empty")
+                        } else {
+                            toastMsg(it.message ?: "")
+                        }
+
                     }
                 }
             })
@@ -110,6 +115,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
     private fun initData() {
         viewModel.apply {
             getDetailData(interactionData.userId)
+            getFavorite(interactionData.userId)
         }
 
     }

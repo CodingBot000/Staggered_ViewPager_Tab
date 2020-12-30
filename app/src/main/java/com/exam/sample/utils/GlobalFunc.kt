@@ -11,10 +11,14 @@ import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Build
+import android.view.View
 import android.widget.Toast
 import com.exam.sample.App
+import com.google.android.material.snackbar.Snackbar
 import io.reactivex.Maybe
 import io.reactivex.android.schedulers.AndroidSchedulers
+import kotlinx.android.synthetic.main.activity_detail.*
+import kotlinx.android.synthetic.main.detail_middle_view.*
 
 
 fun shareUrl(shareUrl: String) {
@@ -54,6 +58,9 @@ fun toastMsg(resId: Int) {
 
 @SuppressLint("CheckResult")
 fun toastMsg(msg: String) {
+    if (msg.isEmpty())
+        return
+
     Maybe.just(0).observeOn(AndroidSchedulers.mainThread()).subscribe {
         Toast.makeText(App.getApplication(), msg, Toast.LENGTH_SHORT).show()
     }
@@ -64,4 +71,16 @@ fun isNetworkConnected(): Boolean{
     val activeNetwork : NetworkInfo? = cm.activeNetworkInfo
     val isConnected = activeNetwork != null && activeNetwork.isConnected
     return isConnected
+}
+
+fun snackBarSimpleAlert(msgResId: Int, btnNameResId:Int, view: View) {
+    val snackbar = Snackbar.make(
+        view,
+        msgResId,
+        Snackbar.LENGTH_SHORT
+    )
+    snackbar.setAction(App.getApplication().applicationContext.getString(btnNameResId)) {
+        snackbar.dismiss()
+    }
+    snackbar.show()
 }

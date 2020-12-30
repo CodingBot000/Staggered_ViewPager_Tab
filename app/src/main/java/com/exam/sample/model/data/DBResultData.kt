@@ -9,4 +9,4 @@ import kotlinx.android.parcel.Parcelize
 /**
  * Database ResultData
  */
-data class DBResultData(val flag:String, val result:Boolean)
+data class DBResultData(val flag:String, val data:Any?, val result:Boolean)

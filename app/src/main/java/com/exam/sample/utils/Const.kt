@@ -16,6 +16,7 @@ class Const {
             R.string.tabNameClips)
 
         const val DB_NAME = "GiphyFavoriteDB.db"
+        const val DB_SELECT = "SELECT"
         const val DB_INSERT = "INSERT"
         const val DB_DELETE = "DELETE"
         const val DB_UPDATE = "UPDATE"

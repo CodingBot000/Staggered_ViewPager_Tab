@@ -1,13 +1,16 @@
 package com.exam.sample.viewmodel
 
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.exam.sample.common.BaseViewModel
 import com.exam.sample.livedata.Event
+import com.exam.sample.model.data.DBResultData
 import com.exam.sample.model.repository.favorite.FavoriteInfoRepository
 import com.exam.sample.model.data.FavoriteInfo
 import com.exam.sample.model.data.TrendingData
+import com.exam.sample.utils.Const
 
 import com.exam.sample.utils.Resource
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -15,6 +18,8 @@ import io.reactivex.schedulers.Schedulers
 import java.lang.StringBuilder
 
 class FavoriteViewModel(private val favoriteInfoRepository: FavoriteInfoRepository) : BaseViewModel()  {
+    private val _dbDataSuccessEvent = MutableLiveData<Event<Resource<DBResultData>>>()
+    val dbDataSuccessEvent: LiveData<Event<Resource<DBResultData>>> get() = _dbDataSuccessEvent
 
     private val _itemLiveData = MutableLiveData<Event<Resource<TrendingData>>>()
     val itemLiveData: LiveData<Event<Resource<TrendingData>>> get() = _itemLiveData
@@ -45,8 +50,17 @@ class FavoriteViewModel(private val favoriteInfoRepository: FavoriteInfoReposito
         )
     }
 
-    fun getFavoriteAll() : LiveData<List<FavoriteInfo>> {
-        return favoriteInfoRepository.getFavoriteAllDB()
+    @SuppressLint("CheckResult")
+    fun getFavoriteAll() {
+        favoriteInfoRepository.getFavoriteAllDB().subscribeOn (Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({
+            _dbDataSuccessEvent.postValue(Event(Resource.success(DBResultData(Const.DB_SELECT, it!!, true))))
+        }, {
+            _dbDataSuccessEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(
+                Const.DB_SELECT, null,false)
+            )))
+        })
     }
 
     override fun onCleared() {

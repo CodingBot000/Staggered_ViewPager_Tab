@@ -10,7 +10,7 @@ import io.reactivex.Single
 interface DetailDataRepository {
     fun requestDetailData(id: String): Single<TrendingData>
 
-    fun getFavoriteDB(userId : String) : LiveData<FavoriteInfo>
+    fun getFavoriteDB(userId : String) : Single<FavoriteInfo>
     fun insertFavoriteDB(favoriteInfo : FavoriteInfo) : Completable
     fun removeFavoriteDB(favoriteInfo : FavoriteInfo) : Completable
     fun updateFavoriteDB(favoriteInfo : FavoriteInfo) : Completable

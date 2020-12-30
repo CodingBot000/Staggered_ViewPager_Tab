@@ -9,11 +9,11 @@ import io.reactivex.Single
 class FavoriteInfoLocalDataSourceImpl(private val favoriteDao: FavoriteDao) :
     FavoriteInfoLocalDataSource {
 
-    override fun getInfo(userId : String) : LiveData<FavoriteInfo> {
+    override fun getInfo(userId : String) : Single<FavoriteInfo> {
         return favoriteDao.getData(userId)
     }
 
-    override fun getInfoAll() : LiveData<List<FavoriteInfo>> {
+    override fun getInfoAll() : Single<List<FavoriteInfo>> {
         return favoriteDao.getAll()
     }
 

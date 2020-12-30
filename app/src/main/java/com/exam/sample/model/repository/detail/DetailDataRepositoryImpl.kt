@@ -18,7 +18,7 @@ class DetailDataRepositoryImpl(
         return detailDataRemoteDataSource.requestDetailData(id)
     }
 
-    override fun getFavoriteDB(userId: String): LiveData<FavoriteInfo> {
+    override fun getFavoriteDB(userId: String): Single<FavoriteInfo> {
         return favoriteInfoLocalDataSource.getInfo(userId)
     }
 

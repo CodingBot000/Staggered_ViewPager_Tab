@@ -1,6 +1,7 @@
 package com.exam.sample.viewmodel
 
 
+import android.annotation.SuppressLint
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -14,6 +15,7 @@ import com.exam.sample.utils.Const
 
 import com.exam.sample.utils.Resource
 import com.exam.sample.utils.isNetworkConnected
+import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
@@ -55,9 +57,9 @@ class DetailViewModel(private val detailDataRepository: DetailDataRepository) : 
                 }
                 .doAfterTerminate {  }
                 .subscribe({
-                    _dbDataSuccessEvent.postValue(Event(Resource.success(DBResultData(Const.DB_INSERT, true))))
+                    _dbDataSuccessEvent.postValue(Event(Resource.success(DBResultData(Const.DB_INSERT, null,true))))
                 }, {
-                    _dbDataSuccessEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(Const.DB_INSERT, false))))
+                    _dbDataSuccessEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(Const.DB_INSERT, null,false))))
                 })
         )
     }
@@ -72,16 +74,29 @@ class DetailViewModel(private val detailDataRepository: DetailDataRepository) : 
                 }
                 .doAfterTerminate {  }
                 .subscribe({
-                    _dbDataSuccessEvent.postValue(Event(Resource.success(DBResultData(Const.DB_DELETE, true))))
+                    _dbDataSuccessEvent.postValue(Event(Resource.success(DBResultData(Const.DB_DELETE, null,true))))
                 }, {
-                    _dbDataSuccessEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(Const.DB_DELETE, false))))
+                    _dbDataSuccessEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(Const.DB_DELETE, null,false))))
                 })
         )
     }
 
-    fun getFavorite(userId : String) : LiveData<FavoriteInfo> {
-        return detailDataRepository.getFavoriteDB(userId)
+//    fun getFavorite(userId : String) : Single<FavoriteInfo> {
+//        return detailDataRepository.getFavoriteDB(userId)
+//    }
+
+    @SuppressLint("CheckResult")
+    fun getFavorite(userId : String) {
+        detailDataRepository.getFavoriteDB(userId)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe ({
+            _dbDataSuccessEvent.postValue(Event(Resource.success(DBResultData(Const.DB_SELECT, it, true))))
+        }, {
+            _dbDataSuccessEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(Const.DB_SELECT, it,false))))
+        })
     }
+
 
     override fun onCleared() {
         super.onCleared()
