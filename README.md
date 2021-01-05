@@ -1,6 +1,7 @@
 # Staggered_ViewPager_Tab
 
 Giphy Api를 활용한 Test Toy Project
+Coding style정도만 확인할수 있는 수준의 프로젝트입니다.
 
 - Library : 
 Koin injection,
