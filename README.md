@@ -2,6 +2,8 @@
 
 Giphy Api를 활용한 Test Toy Project
 
+Coding style정도만 확인할수 있는 수준의 프로젝트입니다.
+
 - Library : 
 Koin injection,
 MVVM, DataBinding,
@@ -26,6 +28,10 @@ DataSource
 StaggerdGridLayout
 읽어온 이미지들의 사이즈가 제각각이라 StaggeredGrid에 로딩하는데 사이즈를 모두 연산하느라 크기가 마구 변하는 현상을 방지하기 위한 
 API 요청으로 받아온 이미지 Width, Height로 먼저 ImageView의 사이즈를 고정하여 안정적 로딩하도록 하였습니다.
+
+
+https://youtu.be/6Ur5dI7zeSo
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/6Ur5dI7zeSo/0.jpg)](https://www.youtube.com/watch?v=6Ur5dI7zeSo)
 
 [전체 구조도 요약]
 ![Alt text](https://github.com/CodingBot000/Staggered_ViewPager_Tab/blob/main/GiphyTestApp_v1.jpg?raw=true)
