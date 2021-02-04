@@ -3,6 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:bind="http://schemas.android.com/tools">
     <data>
+        <import type="com.exam.sample.utils.Const"/>
         <variable
             name="interactionData"
             type="com.exam.sample.model.data.InteractionData" />
@@ -28,7 +29,8 @@
                 android:layout_width="@dimen/button_title_back"
                 android:layout_height="@dimen/button_title_back"
                 android:layout_centerVertical="true"
-                android:background= "@drawable/btn_back"/>
+                android:background= "@drawable/btn_back"
+                android:onClick="@{() -> viewModel.btnClickEventSend(Const.BTN_EVENT_BACK)}"/>
             <TextView
                 android:id = "@+id/txtTitle"
                 android:layout_width="wrap_content"
@@ -60,6 +62,7 @@
 
                 <include
                     layout="@layout/detail_middle_view"
+                    app:viewModel="@{viewModel}"
                     android:id="@+id/ll_middleView"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
