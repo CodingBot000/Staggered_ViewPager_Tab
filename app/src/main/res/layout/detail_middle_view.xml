@@ -1,51 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="@dimen/middle_view_height"
-    android:paddingLeft="@dimen/margin_padding_10dp"
-    android:paddingRight="@dimen/margin_padding_10dp"
-    android:background="@color/colorBlack">
+    xmlns:bind="http://schemas.android.com/tools">
+    <data>
+        <import type="com.exam.sample.utils.Const"/>
+        <variable
+            name="viewModel"
+            type="com.exam.sample.viewmodel.DetailViewModel" />
+    </data>
     <RelativeLayout
-        android:id = "@+id/rl_middle"
+
         android:layout_width="match_parent"
-        android:layout_height="@dimen/detail_middle_height">
-        <ImageView
-            android:layout_width="@dimen/detail_middle_logo_width"
-            android:layout_height="@dimen/detail_middle_logo_height"
-            android:background = "@drawable/detail_middle_logo"
-            android:layout_centerVertical="true" />
-        <CheckBox
-            android:id = "@+id/checkBoxFavorite"
-            android:layout_width="@dimen/checkbox_favorite_size"
-            android:layout_height="@dimen/checkbox_favorite_size"
-            android:background="@drawable/checkbox"
-            android:button="@null"
-            android:layout_marginRight="@dimen/margin_padding_10dp"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/btnSend"/>
-        <ImageButton
-            android:id = "@+id/btnSend"
-            android:layout_width="@dimen/middle_icon_size"
-            android:layout_height="@dimen/middle_icon_size"
-            android:background = "@drawable/icon_share"
-            android:layout_marginRight="@dimen/margin_padding_10dp"
-            android:layout_centerVertical="true"
-            android:layout_toLeftOf="@id/btnMore"/>
-        <ImageButton
-            android:id = "@+id/btnMore"
-            android:layout_width="@dimen/middle_icon_size"
-            android:layout_height="@dimen/middle_icon_size"
-            android:background = "@drawable/icon_more"
-            android:layout_centerVertical="true"
-            android:layout_alignParentRight="true"/>
+        android:layout_height="@dimen/middle_view_height"
+        android:paddingLeft="@dimen/margin_padding_10dp"
+        android:paddingRight="@dimen/margin_padding_10dp"
+        android:background="@color/colorBlack">
+        <RelativeLayout
+            android:id = "@+id/rl_middle"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/detail_middle_height">
+            <ImageView
+                android:layout_width="@dimen/detail_middle_logo_width"
+                android:layout_height="@dimen/detail_middle_logo_height"
+                android:background = "@drawable/detail_middle_logo"
+                android:layout_centerVertical="true" />
+            <CheckBox
+                android:id = "@+id/checkBoxFavorite"
+                android:layout_width="@dimen/checkbox_favorite_size"
+                android:layout_height="@dimen/checkbox_favorite_size"
+                android:background="@drawable/checkbox"
+                android:button="@null"
+                android:onCheckedChanged="@{(compoundButton, checked) -> viewModel.checkBoxChecked(checked)}"
+                android:layout_marginRight="@dimen/margin_padding_10dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/btnSend"/>
+            <ImageButton
+                android:id = "@+id/btnSend"
+                android:layout_width="@dimen/middle_icon_size"
+                android:layout_height="@dimen/middle_icon_size"
+                android:onClick="@{() -> viewModel.btnClickEventSend(Const.BTN_EVENT_SEND)}"
+                android:background = "@drawable/icon_share"
+                android:layout_marginRight="@dimen/margin_padding_10dp"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/btnMore"/>
+            <ImageButton
+                android:id = "@+id/btnMore"
+                android:layout_width="@dimen/middle_icon_size"
+                android:layout_height="@dimen/middle_icon_size"
+                android:onClick="@{() -> viewModel.btnClickEventSend(Const.BTN_EVENT_SHARE)}"
+                android:background = "@drawable/icon_more"
+                android:layout_centerVertical="true"
+                android:layout_alignParentRight="true"/>
+        </RelativeLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/colorWhite"
+            android:text = "@string/detail_middle_msg"
+            android:textSize="12sp"
+            android:layout_alignParentBottom="true"
+            android:layout_below="@id/rl_middle"/>
     </RelativeLayout>
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorWhite"
-        android:text = "@string/detail_middle_msg"
-        android:textSize="12sp"
-        android:layout_alignParentBottom="true"
-        android:layout_below="@id/rl_middle"/>
-</RelativeLayout>
+</layout>

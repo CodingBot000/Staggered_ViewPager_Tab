@@ -23,9 +23,15 @@ import io.reactivex.schedulers.Schedulers
 class DetailViewModel(private val detailDataRepository: DetailDataRepository) : BaseViewModel()  {
     private val _dbDataSuccessEvent = MutableLiveData<Event<Resource<DBResultData>>>()
     val dbDataSuccessEvent: LiveData<Event<Resource<DBResultData>>> get() = _dbDataSuccessEvent
+    private val _favoriteCheckEvent = MutableLiveData<Event<Boolean>>()
+    val favoriteCheckEvent: LiveData<Event<Boolean>> get() = _favoriteCheckEvent
+    private val _btnSimpleEvent = MutableLiveData<Event<Int>>()
+    val btnSimpleEvent: LiveData<Event<Int>> get() = _btnSimpleEvent
+
 
     private val _itemLiveData = MutableLiveData<Event<Resource<TrendingData>>>()
     val itemLiveData: LiveData<Event<Resource<TrendingData>>> get() = _itemLiveData
+
 
     fun getDetailData(id : String) {
         if (!isNetworkConnected())
@@ -81,10 +87,6 @@ class DetailViewModel(private val detailDataRepository: DetailDataRepository) : 
         )
     }
 
-//    fun getFavorite(userId : String) : Single<FavoriteInfo> {
-//        return detailDataRepository.getFavoriteDB(userId)
-//    }
-
     @SuppressLint("CheckResult")
     fun getFavorite(userId : String) {
         detailDataRepository.getFavoriteDB(userId)
@@ -97,7 +99,14 @@ class DetailViewModel(private val detailDataRepository: DetailDataRepository) : 
         })
     }
 
+    fun checkBoxChecked(b: Boolean) {
+        _favoriteCheckEvent.value = Event(b)
+    }
 
+    fun btnClickEventSend(index:Int) {
+        _btnSimpleEvent.value = Event(index)
+
+    }
     override fun onCleared() {
         super.onCleared()
     }

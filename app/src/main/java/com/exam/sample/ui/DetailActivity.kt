@@ -1,6 +1,7 @@
 package com.exam.sample.ui
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -49,8 +50,17 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
 
-
         initData()
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+    }
+
+    override fun onResume() {
+        super.onResume()
+        // Detail은 액티비티가 쌓이도록 구현되어서 뒤로가기로 스택의 기존 뷰로 돌아갔을때 최신상태를 반영하도록 한다
+        viewModel.getFavorite(interactionData.userId)
     }
 
     private fun getIntentData() {
@@ -65,7 +75,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
         binding.recyclerView.layoutManager = layoutManager
         adapter.setHasStableIds(true)
         binding.recyclerView.adapter = adapter
-        initClickEvent()
+
     }
 
 
@@ -93,6 +103,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
                     Status.ERROR -> {
                         if (it.data?.data is EmptyResultSetException) {
                             Log.v(Const.LOG_TAG, "Query returned Empty")
+                            checkBoxFavorite.isChecked = false
                         } else {
                             toastMsg(it.message ?: "")
                         }
@@ -112,60 +123,51 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
                     }
                 }
             })
+
+            favoriteCheckEvent.observe(this@DetailActivity, EventObserver {
+                if (it) {
+                    insertFavorite(
+                        FavoriteInfo(
+                            interactionData.userId,
+                            interactionData.urlSmall,
+                            interactionData.type
+                        )
+                    )
+                }
+                else {
+                    removeFavorite(
+                        FavoriteInfo(
+                            interactionData.userId,
+                            interactionData.urlSmall,
+                            interactionData.type
+                        )
+                    )
+                }
+            })
+
+            btnSimpleEvent.observe(this@DetailActivity, EventObserver {
+                when (it) {
+                    Const.BTN_EVENT_SEND -> {
+                        shareUrl(interactionData.urlEmbeded)
+                    }
+                    Const.BTN_EVENT_SHARE -> {
+                        toastMsg(R.string.msgMore)
+                    }
+                    Const.BTN_EVENT_BACK -> {
+                        finish()
+                    }
+                }
+            })
         }
 
     }
     private fun initData() {
         viewModel.apply {
             getDetailData(interactionData.userId)
-            getFavorite(interactionData.userId)
         }
 
     }
 
-    private fun initClickEvent() {
-        btnBack.setOnClickListener{
-            finish()
-        }
-
-        ll_middleView.apply {
-            // 최초 getFavorite을 통해서 결과를 받아와서 좋아요 체크를 해주는데 이때 아래 changeListener가 불림.
-            // 어차피 insert가     @Insert(onConflict = REPLACE) 이기 때문에
-            // 그냥 두었음. 만약 필요하다면 boolean변수로 제어하던가, 최초에 setOnCheckedChangeListener를 null로 해제했다 재등록하면됨
-            checkBoxFavorite.setOnCheckedChangeListener { compoundButton, b ->
-                if (b) {
-                    viewModel.insertFavorite(
-                        FavoriteInfo(
-                            interactionData.userId,
-                            interactionData.urlSmall,
-                            interactionData.type
-                        )
-                    )
-
-//                    makeSnackBar(R.string.favorite_check, R.string.favorite_uncheck)
-                }
-                else {
-                    viewModel.removeFavorite(
-                        FavoriteInfo(
-                            interactionData.userId,
-                            interactionData.urlSmall,
-                            interactionData.type
-                        )
-                    )
-//                    makeSnackBar(R.string.favorite_uncheck, R.string.favorite_check)
-                }
-            }
-
-            btnSend.setOnClickListener {
-
-               shareUrl(interactionData.urlEmbeded)
-            }
-
-            btnMore.setOnClickListener {
-                toastMsg(R.string.msgMore)
-            }
-        }
-    }
 
     private fun makeSnackBar(msgResId: Int, btnNameResId:Int) {
         val snackbar = Snackbar.make(

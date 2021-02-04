@@ -1,8 +1,10 @@
 package com.exam.sample.service
 
+import android.content.Context
 import android.util.Log
 import androidx.core.app.NotificationManagerCompat
 import androidx.work.Worker
+import androidx.work.WorkerParameters
 import com.exam.sample.App
 import com.exam.sample.R
 import com.exam.sample.model.data.TrendingData
@@ -11,7 +13,10 @@ import com.exam.sample.viewmodel.MainViewModel
 import org.koin.core.KoinComponent
 import org.koin.core.inject
 
-class WorkerDataChangeMonitor : Worker(), KoinComponent, MainViewModel.ServiceListener {
+class WorkerDataChangeMonitor(context: Context, workerParams: WorkerParameters) : Worker(
+    context,
+    workerParams
+), KoinComponent, MainViewModel.ServiceListener {
     private val viewModel : MainViewModel by inject()
     private var dataOld:TrendingData? = null
 
@@ -23,7 +28,7 @@ class WorkerDataChangeMonitor : Worker(), KoinComponent, MainViewModel.ServiceLi
         viewModel.serviceListener = this
         viewModel.getDataFromBackground(0)
 
-        return Result.SUCCESS
+        return Result.success()
     }
 
     override fun listenerFromService(data: TrendingData) {
