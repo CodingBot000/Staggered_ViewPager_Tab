@@ -53,10 +53,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
         initData()
     }
 
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-    }
-
     override fun onResume() {
         super.onResume()
         // Detail은 액티비티가 쌓이도록 구현되어서 뒤로가기로 스택의 기존 뷰로 돌아갔을때 최신상태를 반영하도록 한다
