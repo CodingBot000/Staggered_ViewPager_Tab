@@ -2,7 +2,7 @@
 
 Giphy Api를 활용한 Test Toy Project
 
-Coding style정도만 확인할수 있는 수준의 프로젝트입니다.
+Coding style 및 구조 잡는 것 정도만 확인할수 있는 수준정도의 가벼운 프로젝트입니다.
 
 - Library : 
 Koin injection,
