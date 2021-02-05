@@ -20,7 +20,7 @@ abstract class BaseViewModel
 Repository,
 DataSource
 
--DI :
+- DI :
 Koin
 
 * WorkManager
