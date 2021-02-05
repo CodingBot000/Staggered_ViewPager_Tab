@@ -32,9 +32,10 @@ API 요청으로 받아온 이미지 Width, Height로 먼저 ImageView의 사이
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/6Ur5dI7zeSo/0.jpg)](https://www.youtube.com/watch?v=6Ur5dI7zeSo)
 
+https://youtu.be/6Ur5dI7zeSo
 링크 누르시면 동영상 확인가능하십니다
 
-https://youtu.be/6Ur5dI7zeSo
+
 
 [전체 구조도 요약]
 ![Alt text](https://github.com/CodingBot000/Staggered_ViewPager_Tab/blob/main/GiphyTestApp_v1.jpg?raw=true)
