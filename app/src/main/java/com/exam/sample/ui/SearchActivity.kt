@@ -155,8 +155,8 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>()
             }
         })
 
-        val searchKetTW = SearchKeyTextWatcher()
-        searchKetTW.getSearchKeyChangeObserver()
+
+        viewModel.getSearchKeyChangeObserver()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe {
@@ -170,8 +170,28 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>()
                     viewModel.getSearch(keyword, offset)
                 }
             }
-        edtSearch.addTextChangedListener(searchKetTW)
+
         edtSearch.requestFocus()
+
+        //Databinding을 사용하지않을 경우 아래 이용
+//        val searchKetTW = SearchKeyTextWatcher()
+//        searchKetTW.getSearchKeyChangeObserver()
+//            .subscribeOn(Schedulers.io())
+//            .observeOn(AndroidSchedulers.mainThread())
+//            .subscribe {
+//                if (it == keyword)
+//                    return@subscribe
+//                keyword = it
+//                if (it.isEmpty()) {
+//                    adapter.clearItem()
+//                } else {
+//                    offset = 0
+//                    viewModel.getSearch(keyword, offset)
+//                }
+//            }
+//        edtSearch.addTextChangedListener(searchKetTW)
+//        edtSearch.requestFocus()
+
     }
 
     override fun onDestroy() {

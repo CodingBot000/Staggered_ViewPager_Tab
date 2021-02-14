@@ -5,6 +5,9 @@
 
     <data>
         <variable
+            name="onTextChanged"
+            type="androidx.databinding.adapters.TextViewBindingAdapter.OnTextChanged" />
+        <variable
             name="viewModel"
             type="com.exam.sample.viewmodel.SearchViewModel" />
     </data>
@@ -21,6 +24,7 @@
             android:layout_height="@dimen/edttext_height"
             android:background="@color/colorDarkSky"
             android:hint = "@string/edttext_hint"
+            android:onTextChanged="@{viewModel.onTextChanged}"
             android:imeOptions="actionSearch"
             android:inputType="text"
             style = "@style/TextTitleStyle"
