@@ -13,6 +13,7 @@ import com.exam.sample.adapter.StaggeredAdapter
 import com.exam.sample.common.BaseActivity
 import com.exam.sample.databinding.ActivityDetailBinding
 import com.exam.sample.livedata.EventObserver
+import com.exam.sample.livedata.RxEventBus
 import com.exam.sample.model.data.FavoriteInfo
 import com.exam.sample.model.data.InteractionData
 import com.exam.sample.utils.Const
@@ -139,6 +140,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
                         )
                     )
                 }
+                RxEventBus.sendEvent(Const.RX_EVENT_REFRESH_FAVORITE)
             })
 
             btnSimpleEvent.observe(this@DetailActivity, EventObserver {

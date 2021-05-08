@@ -12,14 +12,14 @@ import com.exam.sample.model.data.TrendingData
 import com.exam.sample.model.repository.search.SearchRepository
 import com.exam.sample.utils.Resource
 import com.exam.sample.model.repository.trending.TrendingRepository
+import com.exam.sample.model.usecase.UseCaseApiManager
 import com.exam.sample.utils.isNetworkConnected
 import com.exam.sample.utils.toastMsg
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 
-class MainViewModel(private val trendingRepository: TrendingRepository) : BaseViewModel()  {
-
+class MainViewModel(private val useCaseApiManager: UseCaseApiManager) : BaseViewModel()  {
 
     interface ServiceListener {
         fun listenerFromService(data : TrendingData)
@@ -32,12 +32,10 @@ class MainViewModel(private val trendingRepository: TrendingRepository) : BaseVi
             return
 
         compositeDisposable.add(
-            trendingRepository.requestTrendingData(offset, rating)
-                .subscribeOn(Schedulers.io())
-                .doOnSubscribe {}
-                .doAfterTerminate {  }
+            useCaseApiManager.requestTrendingData(offset, rating)
                 .subscribe({ it ->
-                        serviceListener?.listenerFromService(it)
+                    serviceListener?.listenerFromService(it)
+
                 }, {
 
                 })

@@ -1,6 +1,7 @@
 package com.exam.sample.ui
 
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
@@ -10,8 +11,10 @@ import com.exam.sample.R
 import com.exam.sample.adapter.ScreenSlideViewPagerAdapter
 import com.exam.sample.common.BaseActivity
 import com.exam.sample.databinding.ActivityFavoriteBinding
+import com.exam.sample.livedata.RxEventBus
 import com.exam.sample.ui.fragment.FavoriteFragment
 import com.exam.sample.ui.fragment.UploadFragment
+import com.exam.sample.utils.Const
 import com.exam.sample.utils.animation.DepthPageTransformer
 import com.exam.sample.utils.extention.setImageSize
 import com.exam.sample.viewmodel.FavoriteViewModel
@@ -43,10 +46,13 @@ class FavoriteActivity :   BaseActivity<ActivityFavoriteBinding, FavoriteViewMod
 
     }
 
-    override fun onNewIntent(intent: Intent?) {
-        super.onNewIntent(intent)
-        favoriteFragment.onNewIntent(intent)
-        uploadFragment.onNewIntent(intent)
+    @SuppressLint("CheckResult")
+    override fun onResume() {
+        super.onResume()
+        RxEventBus.getObservable().subscribe {
+            if (it == Const.RX_EVENT_REFRESH_FAVORITE)
+                favoriteFragment.refreshFravoriteList()
+        }
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)

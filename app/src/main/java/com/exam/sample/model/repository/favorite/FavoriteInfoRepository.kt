@@ -9,7 +9,6 @@ import io.reactivex.Single
 
 interface FavoriteInfoRepository {
     fun requestGIFsByIds(idsList : String): Single<TrendingData>
-
     fun getFavoriteAllDB() : Single<List<FavoriteInfo>>
     fun getFavoriteDB(userId : String) : Single<FavoriteInfo>
     fun insertFavoriteDB(favoriteInfo : FavoriteInfo) : Completable

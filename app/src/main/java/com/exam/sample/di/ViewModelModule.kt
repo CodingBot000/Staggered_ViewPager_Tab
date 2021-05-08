@@ -11,8 +11,8 @@ val viewModelModule = module {
     viewModel { TrendingViewModel(get()) }
     viewModel { ArtistsViewModel(get()) }
     viewModel { ClipsViewModel(get()) }
-    viewModel { DetailViewModel(get()) }
-    viewModel { FavoriteViewModel(get()) }
+    viewModel { DetailViewModel(get(), get()) }
+    viewModel { FavoriteViewModel(get(), get()) }
     viewModel { SearchViewModel(get()) }
 
 }

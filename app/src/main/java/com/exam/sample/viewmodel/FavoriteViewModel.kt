@@ -10,6 +10,8 @@ import com.exam.sample.model.data.DBResultData
 import com.exam.sample.model.repository.favorite.FavoriteInfoRepository
 import com.exam.sample.model.data.FavoriteInfo
 import com.exam.sample.model.data.TrendingData
+import com.exam.sample.model.usecase.UseCaseApiManager
+import com.exam.sample.model.usecase.UseCaseDbManager
 import com.exam.sample.utils.Const
 
 import com.exam.sample.utils.Resource
@@ -17,7 +19,9 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 import java.lang.StringBuilder
 
-class FavoriteViewModel(private val favoriteInfoRepository: FavoriteInfoRepository) : BaseViewModel()  {
+class FavoriteViewModel(private val useCaseApiManager: UseCaseApiManager,
+                        private val useCaseDbManager: UseCaseDbManager
+) : BaseViewModel()  {
     private val _dbDataSuccessEvent = MutableLiveData<Event<Resource<DBResultData>>>()
     val dbDataSuccessEvent: LiveData<Event<Resource<DBResultData>>> get() = _dbDataSuccessEvent
 
@@ -35,9 +39,7 @@ class FavoriteViewModel(private val favoriteInfoRepository: FavoriteInfoReposito
         sb.deleteCharAt(sb.lastIndex)
 
         compositeDisposable.add(
-            favoriteInfoRepository.requestGIFsByIds(sb.toString())
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+            useCaseApiManager.requestGIFsByIds(sb.toString())
                 .doOnSubscribe {
                     showProgress()
                 }
@@ -45,22 +47,21 @@ class FavoriteViewModel(private val favoriteInfoRepository: FavoriteInfoReposito
                 .subscribe({ it ->
                     _itemLiveData.postValue(Event(Resource.success(it)))
                 }, {
-                     _itemLiveData.postValue(Event(Resource.error(it.message.toString(), null)))
+                    _itemLiveData.postValue(Event(Resource.error(it.message.toString(), null)))
                 })
         )
     }
 
     @SuppressLint("CheckResult")
     fun getFavoriteAll() {
-        favoriteInfoRepository.getFavoriteAllDB().subscribeOn (Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        useCaseDbManager.getFavoriteAll()
             .subscribe({
-            _dbDataSuccessEvent.postValue(Event(Resource.success(DBResultData(Const.DB_SELECT, it!!, true))))
-        }, {
-            _dbDataSuccessEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(
-                Const.DB_SELECT, null,false)
-            )))
-        })
+                _dbDataSuccessEvent.postValue(Event(Resource.success(DBResultData(Const.DB_SELECT, it!!, true))))
+            }, {
+                _dbDataSuccessEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(
+                    Const.DB_SELECT, null,false)
+                )))
+            })
     }
 
     override fun onCleared() {

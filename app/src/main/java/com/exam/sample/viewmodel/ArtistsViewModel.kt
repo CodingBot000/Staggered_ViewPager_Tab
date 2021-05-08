@@ -13,18 +13,15 @@ import com.exam.sample.model.data.TrendingData
 import com.exam.sample.model.repository.search.SearchRepository
 import com.exam.sample.utils.Resource
 import com.exam.sample.model.repository.trending.TrendingRepository
+import com.exam.sample.model.usecase.UseCaseApiManager
 import com.exam.sample.utils.isNetworkConnected
 import com.exam.sample.utils.toastMsg
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-
-
-
-class ArtistsViewModel(private val searchRepository: SearchRepository) : BaseSearchViewModel()  {
-
+class ArtistsViewModel(private val useCaseApiManager: UseCaseApiManager) : BaseSearchViewModel()  {
     fun getSearch(keyword:String, offset: Int, isMore : Boolean = false) {
-        getSearch(searchRepository, keyword, offset, isMore)
+        getSearch(useCaseApiManager, keyword, offset, isMore)
     }
 
     override fun onCleared() {

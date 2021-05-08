@@ -11,6 +11,7 @@ import com.exam.sample.R
 import com.exam.sample.livedata.Event
 import com.exam.sample.model.data.TrendingData
 import com.exam.sample.model.repository.search.SearchRepository
+import com.exam.sample.model.usecase.UseCaseApiManager
 import com.exam.sample.utils.Const
 import com.exam.sample.utils.Resource
 import com.exam.sample.utils.isNetworkConnected
@@ -25,14 +26,12 @@ abstract class BaseSearchViewModel(): BaseViewModel() {
     private val _itemLiveDataAdd = MutableLiveData<Event<Resource<TrendingData>>>()
     val itemLiveDataAdd: LiveData<Event<Resource<TrendingData>>> get() = _itemLiveDataAdd
 
-    fun getSearch(searchRepository:SearchRepository,  keyword:String, offset: Int, isMore : Boolean = false) {
+    fun getSearch(useCaseApiManager: UseCaseApiManager,  keyword:String, offset: Int, isMore : Boolean = false) {
         if (!isNetworkConnected())
             return
 
         compositeDisposable.add(
-            searchRepository.requestSearchData(keyword, offset)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+            useCaseApiManager.requestSearchData(keyword, offset)
                 .doOnSubscribe {
                     showProgress()
                 }

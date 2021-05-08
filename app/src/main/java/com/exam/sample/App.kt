@@ -46,7 +46,7 @@ class App : MultiDexApplication() {
         sApplication = this;
         startKoin {
             androidContext(this@App)
-            modules(listOf(networkModule, repoModule, remoteDataModule, localDataModule, viewModelModule))
+            modules(listOf(networkModule, repoModule, useCaseModule, remoteDataModule, localDataModule, viewModelModule))
         }
 
         val serviceIntent by lazy {

@@ -11,6 +11,8 @@ import com.exam.sample.model.repository.detail.DetailDataRepository
 import com.exam.sample.model.data.DBResultData
 import com.exam.sample.model.data.FavoriteInfo
 import com.exam.sample.model.data.TrendingData
+import com.exam.sample.model.usecase.UseCaseApiManager
+import com.exam.sample.model.usecase.UseCaseDbManager
 import com.exam.sample.utils.Const
 
 import com.exam.sample.utils.Resource
@@ -20,14 +22,14 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 
-class DetailViewModel(private val detailDataRepository: DetailDataRepository) : BaseViewModel()  {
+class DetailViewModel(private val useCaseDbManager: UseCaseDbManager,
+                      private val useCaseApiManager: UseCaseApiManager) : BaseViewModel()  {
     private val _dbDataSuccessEvent = MutableLiveData<Event<Resource<DBResultData>>>()
     val dbDataSuccessEvent: LiveData<Event<Resource<DBResultData>>> get() = _dbDataSuccessEvent
     private val _favoriteCheckEvent = MutableLiveData<Event<Boolean>>()
     val favoriteCheckEvent: LiveData<Event<Boolean>> get() = _favoriteCheckEvent
     private val _btnSimpleEvent = MutableLiveData<Event<Int>>()
     val btnSimpleEvent: LiveData<Event<Int>> get() = _btnSimpleEvent
-
 
     private val _itemLiveData = MutableLiveData<Event<Resource<TrendingData>>>()
     val itemLiveData: LiveData<Event<Resource<TrendingData>>> get() = _itemLiveData
@@ -38,9 +40,7 @@ class DetailViewModel(private val detailDataRepository: DetailDataRepository) : 
             return
 
         compositeDisposable.add(
-            detailDataRepository.requestDetailData(id)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
+            useCaseApiManager.requestDetailData(id)
                 .doOnSubscribe {
                     showProgress()
                 }
@@ -55,13 +55,7 @@ class DetailViewModel(private val detailDataRepository: DetailDataRepository) : 
 
     fun insertFavorite(favoriteInfo: FavoriteInfo)  {
         compositeDisposable.add(
-            detailDataRepository.insertFavoriteDB(favoriteInfo)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe {
-
-                }
-                .doAfterTerminate {  }
+            useCaseDbManager.insertFavorites(favoriteInfo)
                 .subscribe({
                     _dbDataSuccessEvent.postValue(Event(Resource.success(DBResultData(Const.DB_INSERT, null,true))))
                 }, {
@@ -72,13 +66,7 @@ class DetailViewModel(private val detailDataRepository: DetailDataRepository) : 
 
     fun removeFavorite(favoriteInfo: FavoriteInfo) {
         compositeDisposable.add(
-            detailDataRepository.removeFavoriteDB(favoriteInfo)
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .doOnSubscribe {
-
-                }
-                .doAfterTerminate {  }
+            useCaseDbManager.removeFavorite(favoriteInfo)
                 .subscribe({
                     _dbDataSuccessEvent.postValue(Event(Resource.success(DBResultData(Const.DB_DELETE, null,true))))
                 }, {
@@ -89,18 +77,17 @@ class DetailViewModel(private val detailDataRepository: DetailDataRepository) : 
 
     @SuppressLint("CheckResult")
     fun getFavorite(userId : String) {
-        detailDataRepository.getFavoriteDB(userId)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+        useCaseDbManager.getFavorite(userId)
             .subscribe ({
-            _dbDataSuccessEvent.postValue(Event(Resource.success(DBResultData(Const.DB_SELECT, it, true))))
-        }, {
-            _dbDataSuccessEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(Const.DB_SELECT, it,false))))
-        })
+                _dbDataSuccessEvent.postValue(Event(Resource.success(DBResultData(Const.DB_SELECT, it, true))))
+            }, {
+                _dbDataSuccessEvent.postValue(Event(Resource.error(it.message.toString(), DBResultData(Const.DB_SELECT, it,false))))
+            })
     }
 
     fun checkBoxChecked(b: Boolean) {
         _favoriteCheckEvent.value = Event(b)
+
     }
 
     fun btnClickEventSend(index:Int) {

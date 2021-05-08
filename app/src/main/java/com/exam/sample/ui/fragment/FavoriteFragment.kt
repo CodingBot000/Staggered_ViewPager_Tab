@@ -61,7 +61,7 @@ class FavoriteFragment() : BaseFragment<FragmentFavoriteBinding, FavoriteViewMod
         initData()
     }
 
-    fun onNewIntent(intent : Intent?) {
+    fun refreshFravoriteList() {
         adapter.clearItem()
         initData()
     }
