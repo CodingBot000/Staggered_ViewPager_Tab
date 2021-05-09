@@ -1,4 +1,4 @@
-package com.exam.sample.common
+package com.exam.sample.viewmodel.base
 
 
 import android.util.Log

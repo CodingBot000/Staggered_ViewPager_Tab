@@ -1,4 +1,4 @@
-package com.exam.sample.common
+package com.exam.sample.ui.base
 
 
 import android.os.Bundle
@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.exam.sample.viewmodel.base.BaseViewModel
 
 abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel>() : AppCompatActivity() {
     lateinit var binding: B

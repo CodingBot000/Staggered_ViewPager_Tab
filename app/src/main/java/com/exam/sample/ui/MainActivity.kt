@@ -8,19 +8,17 @@ import androidx.annotation.RequiresApi
 
 import com.exam.sample.R
 import com.exam.sample.adapter.ScreenSlideViewPagerAdapter
-import com.exam.sample.common.BaseActivity
+import com.exam.sample.ui.base.BaseActivity
 import com.exam.sample.databinding.ActivityMainBinding
 import com.exam.sample.ui.fragment.*
 import com.exam.sample.utils.Const
 import com.exam.sample.utils.animation.ZoomOutPageTransformer
-import com.exam.sample.utils.toastMsg
 
 import com.exam.sample.viewmodel.MainViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
-import kotlin.system.measureTimeMillis
 
 
 class MainActivity :  BaseActivity<ActivityMainBinding, MainViewModel>() {

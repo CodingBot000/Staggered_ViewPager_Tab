@@ -5,20 +5,23 @@ import com.exam.sample.domain.usecase.base.SingleUseCase
 import com.exam.sample.livedata.Event
 import com.exam.sample.model.data.TrendingData
 import com.exam.sample.model.repository.detail.DetailDataRepository
+import com.exam.sample.model.repository.trending.TrendingRepository
 
 import io.reactivex.Single
 
 
-class UseCaseGetDetailData (private val detailDataRepository: DetailDataRepository)
+class UseCaseGetTrendingData (private val trendingRepository: TrendingRepository)
 : SingleUseCase<TrendingData>() {
 
-    private lateinit var dataId: String
+    private var offset: Int = 0
+    private lateinit var rating: String
 
-    fun setDataId(id: String) {
-        dataId = id
+    fun setData(offset: Int, rating: String) {
+        this.offset = offset
+        this.rating = rating
     }
 
     override fun buildUseCaseSingle(): Single<TrendingData> {
-        return detailDataRepository.requestDetailData(dataId)
+        return trendingRepository.requestTrendingData(offset, rating)
     }
 }

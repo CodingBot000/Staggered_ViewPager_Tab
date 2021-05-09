@@ -1,4 +1,4 @@
-package com.exam.sample.common
+package com.exam.sample.ui.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.exam.sample.viewmodel.base.BaseViewModel
 
 abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel>() : Fragment() {
     lateinit var binding: B

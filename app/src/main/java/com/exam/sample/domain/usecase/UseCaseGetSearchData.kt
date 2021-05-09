@@ -5,23 +5,24 @@ import com.exam.sample.domain.usecase.base.SingleUseCase
 import com.exam.sample.livedata.Event
 import com.exam.sample.model.data.TrendingData
 import com.exam.sample.model.repository.detail.DetailDataRepository
+import com.exam.sample.model.repository.search.SearchRepository
 import com.exam.sample.model.repository.trending.TrendingRepository
 
 import io.reactivex.Single
 
 
-class UseCaseGetTrendingData (private val trendingRepository: TrendingRepository)
+class UseCaseGetSearchData (private val searchRepository: SearchRepository)
 : SingleUseCase<TrendingData>() {
 
     private var offset: Int = 0
-    private lateinit var rating: String
+    private lateinit var keyword: String
 
-    fun setDataId(offset: Int, rating: String) {
+    fun setData(keyword: String, offset: Int) {
         this.offset = offset
-        this.rating = rating
+        this.keyword = keyword
     }
 
     override fun buildUseCaseSingle(): Single<TrendingData> {
-        return trendingRepository.requestTrendingData(offset, rating)
+        return searchRepository.requestSearchData(keyword, offset)
     }
 }

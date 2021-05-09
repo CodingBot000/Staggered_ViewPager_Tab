@@ -1,8 +1,6 @@
-package com.exam.sample.model.usecase
+package com.exam.sample.domain.usecase
 
-import android.annotation.SuppressLint
 import com.exam.sample.model.data.FavoriteInfo
-import com.exam.sample.model.datasource.local.favorite.FavoriteInfoLocalDataSource
 import com.exam.sample.model.repository.favorite.FavoriteInfoRepository
 
 import io.reactivex.Completable

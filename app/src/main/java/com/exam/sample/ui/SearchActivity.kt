@@ -3,18 +3,15 @@ package com.exam.sample.ui
 
 import android.annotation.SuppressLint
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.exam.sample.R
 import com.exam.sample.adapter.StaggeredAdapter
-import com.exam.sample.common.BaseActivity
+import com.exam.sample.ui.base.BaseActivity
 import com.exam.sample.common.LoadMoreScrollListener
 import com.exam.sample.databinding.ActivitySearchBinding
 import com.exam.sample.livedata.EventObserver
@@ -23,14 +20,11 @@ import com.exam.sample.utils.*
 import com.exam.sample.utils.extention.hideKeyboard
 import com.exam.sample.utils.extention.startActivityDetailExtras
 import com.exam.sample.viewmodel.SearchViewModel
-import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.PublishSubject
 
 import kotlinx.android.synthetic.main.activity_search.*
 import org.koin.android.viewmodel.ext.android.viewModel
-import java.util.concurrent.TimeUnit
 
 
 class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>()

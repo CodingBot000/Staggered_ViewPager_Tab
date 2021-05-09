@@ -8,7 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 
 import com.exam.sample.R
-import com.exam.sample.common.BaseFragment
+import com.exam.sample.ui.base.BaseFragment
 
 import com.exam.sample.databinding.FragmentUploadBinding
 import com.exam.sample.viewmodel.FavoriteViewModel

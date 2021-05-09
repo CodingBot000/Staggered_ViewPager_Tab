@@ -11,7 +11,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.exam.sample.R
 import com.exam.sample.adapter.StaggeredAdapter
-import com.exam.sample.common.BaseFragment
+import com.exam.sample.ui.base.BaseFragment
 import com.exam.sample.common.LoadMoreScrollListener
 import com.exam.sample.databinding.FragmentArtistsBinding
 import com.exam.sample.databinding.FragmentTrendingBinding
@@ -23,10 +23,6 @@ import com.exam.sample.utils.extention.hideKeyboard
 import com.exam.sample.utils.extention.startActivityDetailExtras
 import com.exam.sample.viewmodel.ArtistsViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
-
-import com.exam.sample.viewmodel.MainViewModel
-import kotlinx.android.synthetic.main.activity_search.*
-import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
 class ArtistsFragment  : BaseFragment<FragmentArtistsBinding, ArtistsViewModel>(), SwipeRefreshLayout.OnRefreshListener {

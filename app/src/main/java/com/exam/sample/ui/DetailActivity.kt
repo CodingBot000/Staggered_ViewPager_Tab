@@ -1,16 +1,14 @@
 package com.exam.sample.ui
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.room.EmptyResultSetException
 import com.exam.sample.R
 import com.exam.sample.adapter.StaggeredAdapter
-import com.exam.sample.common.BaseActivity
+import com.exam.sample.ui.base.BaseActivity
 import com.exam.sample.databinding.ActivityDetailBinding
 import com.exam.sample.livedata.EventObserver
 import com.exam.sample.livedata.RxEventBus
@@ -61,7 +59,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
     }
 
     private fun getIntentData() {
-        interactionData = intent.getParcelableExtra<InteractionData>(Const.EXTRA_KEY_INTERACTION)
+        interactionData = intent.getParcelableExtra<InteractionData>(Const.EXTRA_KEY_INTERACTION)!!
         binding.interactionData = interactionData
     }
 

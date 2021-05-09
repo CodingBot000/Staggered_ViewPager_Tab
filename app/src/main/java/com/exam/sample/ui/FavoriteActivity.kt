@@ -2,14 +2,13 @@ package com.exam.sample.ui
 
 
 import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.core.view.ViewCompat
 import com.exam.sample.R
 import com.exam.sample.adapter.ScreenSlideViewPagerAdapter
-import com.exam.sample.common.BaseActivity
+import com.exam.sample.ui.base.BaseActivity
 import com.exam.sample.databinding.ActivityFavoriteBinding
 import com.exam.sample.livedata.RxEventBus
 import com.exam.sample.ui.fragment.FavoriteFragment

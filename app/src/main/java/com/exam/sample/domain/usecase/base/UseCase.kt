@@ -1,12 +1,9 @@
-package com.android.artgallery.domain.usecase.base
+package com.exam.sample.domain.usecase.base
 
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 
-/**
- * This class is extended by SingleUseCase classes
- * to use common methods & fields
- **/
+
 abstract class UseCase {
 
     protected var lastDisposable: Disposable? = null

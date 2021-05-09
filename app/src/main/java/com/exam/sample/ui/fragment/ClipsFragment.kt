@@ -5,28 +5,21 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.exam.sample.R
 import com.exam.sample.adapter.StaggeredAdapter
-import com.exam.sample.common.BaseFragment
+import com.exam.sample.ui.base.BaseFragment
 import com.exam.sample.common.LoadMoreScrollListener
-import com.exam.sample.databinding.FragmentArtistsBinding
 import com.exam.sample.databinding.FragmentClipsBinding
-import com.exam.sample.databinding.FragmentTrendingBinding
 import com.exam.sample.livedata.EventObserver
 import com.exam.sample.model.data.TrendingData
 import com.exam.sample.ui.DetailActivity
 import com.exam.sample.utils.*
 import com.exam.sample.utils.extention.startActivityDetailExtras
-import com.exam.sample.viewmodel.ArtistsViewModel
 import com.exam.sample.viewmodel.ClipsViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
-
-import com.exam.sample.viewmodel.MainViewModel
-import org.koin.android.viewmodel.ext.android.sharedViewModel
 
 
 class ClipsFragment  : BaseFragment<FragmentClipsBinding, ClipsViewModel>(), SwipeRefreshLayout.OnRefreshListener {
