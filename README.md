@@ -14,7 +14,8 @@ Room DataBase
 - Extends :
 abstract class BaseActivity,
 abstract class BaseFragment,
-abstract class BaseViewModel
+abstract class BaseViewModel,
+abstract class SingleUseCase
 
 - Domain Layer : UseCase
 UseCaseDbManager
@@ -29,6 +30,14 @@ DataSource
 
 - DI :
 Koin
+
+* DI :
+좀 더 쉽게 쓸수있는 Koin 사용. Dagger로 마이그레이션해서 업데이트 예정
+
+* UseCase :
+UseCase로 분리해서 관림사를 더 세분화. 코드 중복 감소
+DBUseCase CRUD에 따라 일관되게 사용되므로 하나의 UseCase로 묶어도 무방하다고 판단하여 하나로 통일
+Api 관련 UseCase는 SingUseCase를 이용하여 즉시 disposable처리
 
 * WorkManager
 15분에 한번씩 API call을 해서 이전 데이터와 새로가져온 데이터가 다른지 검사해서
