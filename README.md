@@ -16,6 +16,13 @@ abstract class BaseActivity,
 abstract class BaseFragment,
 abstract class BaseViewModel
 
+- Domain Layer : UseCase
+UseCaseDbManager
+UseCaseGetDetailData
+UseCaseGetTrendingData
+UseCaseGetSearchData
+UseCaseGetGIFsByIds
+
 - Model Layer :
 Repository,
 DataSource
