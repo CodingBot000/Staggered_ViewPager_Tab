@@ -1,5 +1,6 @@
 package com.exam.sample.domain.usecase
 
+import com.exam.sample.domain.usecase.base.SingleUseCase
 import com.exam.sample.model.data.FavoriteInfo
 import com.exam.sample.model.repository.favorite.FavoriteInfoRepository
 
@@ -8,7 +9,8 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class UseCaseDbManager (private val favoriteInfoRepository: FavoriteInfoRepository) {
+class UseCaseDbManager (private val favoriteInfoRepository: FavoriteInfoRepository)
+    : SingleUseCase<FavoriteInfo> {
 
     fun getFavoriteAll() : Single<List<FavoriteInfo>> {
         return favoriteInfoRepository.getFavoriteAllDB()
@@ -39,5 +41,4 @@ class UseCaseDbManager (private val favoriteInfoRepository: FavoriteInfoReposito
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
-
 }
