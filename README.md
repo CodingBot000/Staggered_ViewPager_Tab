@@ -18,18 +18,11 @@ abstract class BaseViewModel,
 abstract class SingleUseCase
 
 - Domain Layer : UseCase
-API
-UseCaseGetDetailData
-UseCaseGetTrendingData
-UseCaseGetSearchData
-UseCaseGetGIFsByIds
+* API
+UseCaseGet*
 
-LocalDB
-UseCaseDbSelect
-UseCaseDbSelectAll
-UseCaseDbInsert
-UseCaseDbRemove
-UseCaseDbUpdate
+* LocalDB
+UseCaseDb*
 
 - Model Layer :
 Repository,
