@@ -17,7 +17,7 @@ abstract class BaseFragment,
 abstract class BaseViewModel,
 abstract class SingleUseCase
 
-- Domain Layer : UseCase
+- Domain Layer : 
 * API
 UseCaseGet*
 
@@ -39,8 +39,7 @@ Koin
 
 * UseCase :
 UseCase로 분리해서 관림사를 더 세분화. 코드 중복 감소
-DBUseCase CRUD에 따라 일관되게 사용되므로 하나의 UseCase로 묶어도 무방하다고 판단하여 하나로 통일
-Api 관련 UseCase는 SingUseCase를 이용하여 즉시 disposable처리
+SingUseCase를 이용하여 한번에 하나씩만 실행 -> disposable처리 적용
 
 * WorkManager
 15분에 한번씩 API call을 해서 이전 데이터와 새로가져온 데이터가 다른지 검사해서
