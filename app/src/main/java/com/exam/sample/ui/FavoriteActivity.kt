@@ -48,10 +48,12 @@ class FavoriteActivity :   BaseActivity<ActivityFavoriteBinding, FavoriteViewMod
     @SuppressLint("CheckResult")
     override fun onResume() {
         super.onResume()
-        RxEventBus.getObservable().subscribe {
-            if (it == Const.RX_EVENT_REFRESH_FAVORITE)
-                favoriteFragment.refreshFravoriteList()
-        }
+        viewModel.addDisposable(
+            RxEventBus.getObservable().subscribe {
+                if (it == Const.RX_EVENT_REFRESH_FAVORITE)
+                    favoriteFragment.refreshFravoriteList()
+            }
+        )
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)

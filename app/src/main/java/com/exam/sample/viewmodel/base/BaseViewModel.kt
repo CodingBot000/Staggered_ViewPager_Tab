@@ -14,11 +14,16 @@ import com.exam.sample.utils.Const
 import com.exam.sample.utils.Resource
 import com.exam.sample.utils.toastMsg
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 
 abstract class BaseViewModel(): ViewModel() {
     protected val compositeDisposable = CompositeDisposable()
     private val _isLoading = MutableLiveData<Event<Boolean>>()
     val isLoading: LiveData<Event<Boolean>> get() = _isLoading
+
+    fun addDisposable(disposable: Disposable) {
+        compositeDisposable.add(disposable)
+    }
 
     override fun onCleared() {
         compositeDisposable.dispose()
