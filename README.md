@@ -18,11 +18,18 @@ abstract class BaseViewModel,
 abstract class SingleUseCase
 
 - Domain Layer : UseCase
-UseCaseDbManager
+API
 UseCaseGetDetailData
 UseCaseGetTrendingData
 UseCaseGetSearchData
 UseCaseGetGIFsByIds
+
+LocalDB
+UseCaseDbSelect
+UseCaseDbSelectAll
+UseCaseDbInsert
+UseCaseDbRemove
+UseCaseDbUpdate
 
 - Model Layer :
 Repository,
@@ -47,7 +54,13 @@ Api 관련 UseCase는 SingUseCase를 이용하여 즉시 disposable처리
 다를 경우 notification에 새로운 데이터가 나타났다고 알림을 보여줌.
 
 * LoadMore
-* 검색시 입력문자 변경에 따라 검색버튼 클리없이 실시간 체크해서 검색실행 (RxJava사용)
+검색시 입력문자 변경에 따라 검색버튼 클리없이 실시간 체크해서 검색실행 (RxJava사용)
+
+* CompositeDisposable
+모든 RxJava 네트워크, DB 접근 이벤트를 UseCase 로 옮겼기때문에 기존 ViewModel에는 더이상  compositeDisposable이 없음.
+SigleUseCase를 통해 제거 후 사용으로 바로바로 제거가 되어 메모리누수 리스크를 최소화 시킴.
+데이터 스트림을 지속적으로 받는 케이스가 발생하면 SingeUseCase는 문제가 될 수 있음.
+
 
 StaggerdGridLayout
 읽어온 이미지들의 사이즈가 제각각이라 StaggeredGrid에 로딩하는데 사이즈를 모두 연산하느라 크기가 마구 변하는 현상을 방지하기 위한 
