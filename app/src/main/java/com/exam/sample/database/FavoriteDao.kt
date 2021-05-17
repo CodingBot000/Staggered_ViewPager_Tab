@@ -17,19 +17,19 @@ interface FavoriteDao {
     fun getData(userId : String) : Single<FavoriteInfo>
 
     @Update
-    fun update(favoriteInfo : FavoriteInfo) : Completable
+    fun update(favoriteInfo : FavoriteInfo) : Single<Int>
 
     @Update
-    fun update(list :List<FavoriteInfo>) : Completable
+    fun update(list :List<FavoriteInfo>) : Single<Int>
 
     @Delete
-    fun delete(favoriteInfo : FavoriteInfo) : Completable
+    fun delete(favoriteInfo : FavoriteInfo) : Single<Int>
 
     @Delete
-    fun delete(list :List<FavoriteInfo>) : Completable
+    fun delete(list :List<FavoriteInfo>) : Single<Int>
 
     @Insert(onConflict = REPLACE)
-    fun insert(favoriteInfo: FavoriteInfo) : Completable
+    fun insert(favoriteInfo: FavoriteInfo) : Single<Long>
 
 
 }

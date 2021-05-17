@@ -17,7 +17,7 @@ class BottomBarWidget : RelativeLayout {
         LayoutInflater.from(context).inflate(R.layout.bottombar_view, this, true)
         btnHome.setOnClickListener{
             val intent = Intent(context, MainActivity::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
             context.startActivity(intent)
         }
         btnFavorite.setOnClickListener {

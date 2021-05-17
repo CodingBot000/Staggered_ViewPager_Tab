@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
+import com.exam.sample.livedata.RxEventBus
 import com.exam.sample.viewmodel.base.BaseViewModel
 
 abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel>() : Fragment() {

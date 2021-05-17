@@ -82,7 +82,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
                     View.GONE
             })
 
-            dbDataSuccessEvent.observe(this@DetailActivity, EventObserver {
+            dbEvent.observe(this@DetailActivity, EventObserver {
                 when (it.status) {
                     Status.SUCCESS -> {
                         if (it.data?.flag == Const.DB_SELECT) {

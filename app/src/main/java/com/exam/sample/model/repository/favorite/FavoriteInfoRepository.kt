@@ -11,7 +11,7 @@ interface FavoriteInfoRepository {
     fun requestGIFsByIds(idsList : String): Single<TrendingData>
     fun getFavoriteAllDB() : Single<List<FavoriteInfo>>
     fun getFavoriteDB(userId : String) : Single<FavoriteInfo>
-    fun insertFavoriteDB(favoriteInfo : FavoriteInfo) : Completable
-    fun removeFavoriteDB(favoriteInfo : FavoriteInfo) : Completable
-    fun updateFavoriteDB(favoriteInfo : FavoriteInfo) : Completable
+    fun insertFavoriteDB(favoriteInfo : FavoriteInfo) : Single<Long>
+    fun removeFavoriteDB(favoriteInfo : FavoriteInfo) : Single<Int>
+    fun updateFavoriteDB(favoriteInfo : FavoriteInfo) : Single<Int>
 }

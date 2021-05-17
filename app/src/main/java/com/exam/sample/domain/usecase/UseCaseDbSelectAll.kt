@@ -9,23 +9,10 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class UseCaseDbSelect (private val favoriteInfoRepository: FavoriteInfoRepository)
-: SingleUseCase<Int>() {
+class UseCaseDbSelectAll (private val favoriteInfoRepository: FavoriteInfoRepository)
+: SingleUseCase<List<FavoriteInfo>>() {
 
-    private lateinit var userId: String
-
-    fun setData(userId: String) {
-        this.userId = userId
-    }
-
-    override fun buildUseCaseSingle(): Single<FavoriteInfo> {
-        return favoriteInfoRepository.getFavoriteDB(userId)
-
-    }
-    fun getFavoriteAll() : Single<List<FavoriteInfo>> {
+    override fun buildUseCaseSingle(): Single<List<FavoriteInfo>> {
         return favoriteInfoRepository.getFavoriteAllDB()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
     }
-
 }

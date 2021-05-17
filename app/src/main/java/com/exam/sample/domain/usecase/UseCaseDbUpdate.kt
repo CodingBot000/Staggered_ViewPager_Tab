@@ -9,7 +9,7 @@ import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-class UseCaseDbRemove (private val favoriteInfoRepository: FavoriteInfoRepository)
+class UseCaseDbUpdate (private val favoriteInfoRepository: FavoriteInfoRepository)
 : SingleUseCase<Int>() {
 
     private lateinit var favoriteInfo: FavoriteInfo
@@ -19,7 +19,7 @@ class UseCaseDbRemove (private val favoriteInfoRepository: FavoriteInfoRepositor
     }
 
     override fun buildUseCaseSingle(): Single<Int> {
-        return favoriteInfoRepository.removeFavoriteDB(favoriteInfo)
+        return favoriteInfoRepository.updateFavoriteDB(favoriteInfo)
 
     }
 

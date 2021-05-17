@@ -22,15 +22,15 @@ class DetailDataRepositoryImpl(
         return favoriteInfoLocalDataSource.getInfo(userId)
     }
 
-    override fun insertFavoriteDB(favoriteInfo: FavoriteInfo): Completable {
+    override fun insertFavoriteDB(favoriteInfo: FavoriteInfo): Single<Long> {
         return favoriteInfoLocalDataSource.insertInfo(favoriteInfo)
     }
 
-    override fun removeFavoriteDB(favoriteInfo: FavoriteInfo): Completable {
+    override fun removeFavoriteDB(favoriteInfo: FavoriteInfo): Single<Int> {
         return favoriteInfoLocalDataSource.removeInfo(favoriteInfo)
     }
 
-    override fun updateFavoriteDB(favoriteInfo: FavoriteInfo): Completable {
+    override fun updateFavoriteDB(favoriteInfo: FavoriteInfo): Single<Int> {
         return favoriteInfoLocalDataSource.updateInfo(favoriteInfo)
     }
 

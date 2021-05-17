@@ -24,7 +24,7 @@
             android:layout_height="@dimen/edttext_height"
             android:background="@color/colorDarkSky"
             android:hint = "@string/edttext_hint"
-            android:onTextChanged="@{viewModel.onTextChanged}"
+            android:onTextChanged="@{viewModel::onTextChanged}"
             android:imeOptions="actionSearch"
             android:inputType="text"
             style = "@style/TextTitleStyle"

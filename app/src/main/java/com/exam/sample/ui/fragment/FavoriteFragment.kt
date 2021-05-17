@@ -81,7 +81,7 @@ class FavoriteFragment() : BaseFragment<FragmentFavoriteBinding, FavoriteViewMod
                     View.GONE
             })
 
-            dbDataSuccessEvent.observe(requireActivity(), EventObserver {
+            dbEvent.observe(requireActivity(), EventObserver {
                 when (it.status) {
                     Status.SUCCESS -> {
                         val list = it.data?.data as List<FavoriteInfo>

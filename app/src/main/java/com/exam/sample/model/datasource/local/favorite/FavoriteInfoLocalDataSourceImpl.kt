@@ -17,15 +17,15 @@ class FavoriteInfoLocalDataSourceImpl(private val favoriteDao: FavoriteDao) :
         return favoriteDao.getAll()
     }
 
-    override fun insertInfo(favoriteInfo: FavoriteInfo) : Completable {
+    override fun insertInfo(favoriteInfo: FavoriteInfo) : Single<Long> {
         return favoriteDao.insert(favoriteInfo)
     }
 
-    override fun removeInfo(favoriteInfo: FavoriteInfo) : Completable {
+    override fun removeInfo(favoriteInfo: FavoriteInfo) : Single<Int> {
         return favoriteDao.delete(favoriteInfo)
     }
 
-    override fun updateInfo(favoriteInfo: FavoriteInfo) : Completable {
+    override fun updateInfo(favoriteInfo: FavoriteInfo) : Single<Int> {
         return favoriteDao.update(favoriteInfo)
     }
 }
