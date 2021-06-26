@@ -8,17 +8,20 @@ import android.content.Context
 import android.content.Context.ACTIVITY_SERVICE
 import android.content.Intent
 import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import android.content.pm.PackageInfo
+import android.content.pm.PackageManager
 import android.net.ConnectivityManager
 import android.net.NetworkInfo
 import android.os.Build
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import com.exam.sample.App
+import com.exam.sample.ui.MainActivity
 import com.google.android.material.snackbar.Snackbar
 import io.reactivex.Maybe
 import io.reactivex.android.schedulers.AndroidSchedulers
-import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.android.synthetic.main.detail_middle_view.*
+
 
 
 fun shareUrl(shareUrl: String) {
@@ -83,4 +86,15 @@ fun snackBarSimpleAlert(msgResId: Int, btnNameResId:Int, view: View) {
         snackbar.dismiss()
     }
     snackbar.show()
+}
+
+fun getForeGroundActivityName(): String{
+    val am: ActivityManager =
+        App.getApplication().getSystemService(Context.ACTIVITY_SERVICE) as ActivityManager
+    val foregroundTaskInfo: ActivityManager.RunningTaskInfo = am.getRunningTasks(1).get(0)
+    return foregroundTaskInfo.topActivity!!.getClassName()
+}
+
+fun isMainActivityForground(): Boolean {
+    return getForeGroundActivityName() == MainActivity::class.java.name
 }

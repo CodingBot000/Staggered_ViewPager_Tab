@@ -12,8 +12,6 @@ import com.exam.sample.model.data.TrendingDetail
 import com.exam.sample.utils.Const
 import com.exam.sample.utils.extention.setCellSize
 import com.exam.sample.utils.extention.setRainBowBackgroundColorByPosition
-
-import kotlinx.android.synthetic.main.grid_item.view.*
 import java.util.ArrayList
 
 
@@ -36,17 +34,9 @@ class StaggeredAdapter (private val itemListClick: (TrendingDetail) -> Unit)
 
     override fun onBindViewHolder(holderItem: ItemViewHolder, position: Int) {
         recyclerItemList[position].let {
-            val width = it.images.fixed_width_small.width?.toFloat()
-            val height = it.images.fixed_width_small.height?.toFloat()
-            holderItem.itemView.imgTop.layoutParams = holderItem.itemView.imgTop.setCellSize(
-                width ?: Const.SCREEN_WIDTH_HALF,
-                height ?: Const.SCREEN_WIDTH_HALF
-            )
-            holderItem.itemView.imgTop.setRainBowBackgroundColorByPosition(position)
             holderItem.bind(it)
         }
     }
-
 
     override fun getItemId(position: Int): Long {
         return  (recyclerItemList[position]).id.hashCode().toLong()
@@ -80,6 +70,13 @@ class StaggeredAdapter (private val itemListClick: (TrendingDetail) -> Unit)
             binding.root.setOnClickListener {
                 itemListClick(item)
             }
+            val width = item.images.fixed_width_small.width?.toFloat()
+            val height = item.images.fixed_width_small.height?.toFloat()
+            binding.imgTop.layoutParams = binding.imgTop.setCellSize(
+                width ?: Const.SCREEN_WIDTH_HALF,
+                height ?: Const.SCREEN_WIDTH_HALF
+            )
+            binding.imgTop.setRainBowBackgroundColorByPosition(position)
 
             binding.executePendingBindings()
         }

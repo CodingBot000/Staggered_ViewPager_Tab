@@ -12,6 +12,7 @@ class Const {
         const val LIMIT = 15 //The maximum number of objects to return. (Default: “25”)
         const val OFFSET_DEFAULT = 0  //Specifies the starting position of the results. Defaults to 0.
         const val EMIT_INTERVAL = 1000L
+        const val BACKPRESS_TIME= 2000
         val TAB_TITLES = arrayListOf(R.string.tabNameTrending, R.string.tabNameArtists,
             R.string.tabNameClips)
 

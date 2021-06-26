@@ -5,19 +5,19 @@ import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.annotation.RequiresApi
-
 import com.exam.sample.R
 import com.exam.sample.adapter.ScreenSlideViewPagerAdapter
-import com.exam.sample.ui.base.BaseActivity
 import com.exam.sample.databinding.ActivityMainBinding
-import com.exam.sample.ui.fragment.*
+import com.exam.sample.ui.base.BaseActivity
+import com.exam.sample.ui.fragment.ArtistsFragment
+import com.exam.sample.ui.fragment.ClipsFragment
+import com.exam.sample.ui.fragment.TrendingFragment
 import com.exam.sample.utils.Const
 import com.exam.sample.utils.animation.ZoomOutPageTransformer
-
+import com.exam.sample.utils.toastMsg
 import com.exam.sample.viewmodel.MainViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.activity_main.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -54,18 +54,18 @@ class MainActivity :  BaseActivity<ActivityMainBinding, MainViewModel>() {
 
 
 //        pager.setPageTransformer(DepthPageTransformer())
-        pager.setPageTransformer(ZoomOutPageTransformer())
-        pager.adapter = viewPagerAdapter
+        binding.pager.setPageTransformer(ZoomOutPageTransformer())
+        binding.pager.adapter = viewPagerAdapter
 
-        TabLayoutMediator(binding.tabLayout, pager) { tab, position ->
+        TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
             tab.text = getString(Const.TAB_TITLES[position])
-            pager.setCurrentItem(tab.position, true)
+            binding.pager.setCurrentItem(tab.position, true)
         }.attach()
 
 
       binding.tabLayout.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
             override fun onTabSelected(tab: TabLayout.Tab) {
-                pager.currentItem = tab.position
+                binding.pager.currentItem = tab.position
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab) {}
@@ -92,6 +92,18 @@ class MainActivity :  BaseActivity<ActivityMainBinding, MainViewModel>() {
         Const.SCREEN_WIDTH_HALF = (screenWidth / 2).toFloat()
     }
 
+    private var backKeyPressedTime: Long = 0
+    override fun onBackPressed() {
+        if (System.currentTimeMillis() > backKeyPressedTime + Const.BACKPRESS_TIME) {
+            backKeyPressedTime = System.currentTimeMillis();
+            toastMsg(R.string.onemoretime)
+            return
+        }
+
+        if (System.currentTimeMillis() <= backKeyPressedTime + Const.BACKPRESS_TIME) {
+            finish();
+        }
+    }
 
 
     override fun onDestroy() {

@@ -16,13 +16,14 @@ import com.exam.sample.model.data.FavoriteInfo
 import com.exam.sample.model.data.InteractionData
 import com.exam.sample.utils.Const
 import com.exam.sample.utils.Status
+import com.exam.sample.utils.extention.closeScaleTranslate
+import com.exam.sample.utils.extention.fadeIn
+import com.exam.sample.utils.extention.slideOutToRight
 import com.exam.sample.utils.extention.startActivityDetailExtras
 import com.exam.sample.utils.shareUrl
 import com.exam.sample.utils.toastMsg
 import com.exam.sample.viewmodel.DetailViewModel
 import com.google.android.material.snackbar.Snackbar
-import kotlinx.android.synthetic.main.activity_detail.*
-import kotlinx.android.synthetic.main.detail_middle_view.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -86,7 +87,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
                 when (it.status) {
                     Status.SUCCESS -> {
                         if (it.data?.flag == Const.DB_SELECT) {
-                            checkBoxFavorite.isChecked = it.data.data != null
+                            binding.llMiddleView.checkBoxFavorite.isChecked = it.data.data != null
                         } else {
                             if (it.data?.flag == Const.DB_INSERT)
                                 makeSnackBar(R.string.favorite_check, R.string.favorite_uncheck)
@@ -98,7 +99,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
                     Status.ERROR -> {
                         if (it.data?.data is EmptyResultSetException) {
                             Log.v(Const.LOG_TAG, "Query returned Empty")
-                            checkBoxFavorite.isChecked = false
+                            binding.llMiddleView.checkBoxFavorite.isChecked = false
                         } else {
                             toastMsg(it.message ?: "")
                         }
@@ -138,7 +139,6 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
                         )
                     )
                 }
-                RxEventBus.sendEvent(Const.RX_EVENT_REFRESH_FAVORITE)
             })
 
             btnSimpleEvent.observe(this@DetailActivity, EventObserver {
@@ -167,17 +167,21 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
 
     private fun makeSnackBar(msgResId: Int, btnNameResId:Int) {
         val snackbar = Snackbar.make(
-            topBar,
+            binding.topBar,
             msgResId,
             Snackbar.LENGTH_SHORT
         )
         snackbar.setAction(getString(btnNameResId)) {
-            checkBoxFavorite.performClick()
+            binding.llMiddleView.checkBoxFavorite.performClick()
             snackbar.dismiss()
         }
         snackbar.show()
     }
 
+    override fun finish() {
+        super.finish()
+        slideOutToRight()
+    }
     override fun onDestroy() {
         super.onDestroy()
 

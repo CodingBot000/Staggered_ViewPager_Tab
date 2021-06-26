@@ -11,8 +11,9 @@ import androidx.fragment.app.Fragment
 import com.exam.sample.livedata.RxEventBus
 import com.exam.sample.viewmodel.base.BaseViewModel
 
-abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel>() : Fragment() {
-    lateinit var binding: B
+abstract class BaseFragment<B : ViewDataBinding?, VM : BaseViewModel>() : Fragment() {
+    var _binding: B? = null
+    val binding get() = _binding!!
 
     abstract val viewModel: VM
     abstract val layoutResID: Int
@@ -26,10 +27,10 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel>() : Fragmen
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, layoutResID, container, false)
-        binding.lifecycleOwner = this
+        _binding = DataBindingUtil.inflate(inflater, layoutResID, container, false)
+        _binding?.lifecycleOwner = this
         init()
-        return binding.root
+        return _binding?.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -41,8 +42,7 @@ abstract class BaseFragment<B : ViewDataBinding, VM : BaseViewModel>() : Fragmen
 
     override fun onDestroy() {
         super.onDestroy()
-
-        if(::binding.isInitialized) binding.unbind()
+        _binding = null
     }
 
 }

@@ -9,8 +9,9 @@ import androidx.databinding.ViewDataBinding
 import com.exam.sample.livedata.RxEventBus
 import com.exam.sample.viewmodel.base.BaseViewModel
 
-abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel>() : AppCompatActivity() {
-    lateinit var binding: B
+abstract class BaseActivity<B : ViewDataBinding?, VM : BaseViewModel>() : AppCompatActivity() {
+    var _binding: B? = null
+    val binding: B get() = _binding!!
 
     abstract val viewModel: VM
     abstract val layoutResID: Int
@@ -22,18 +23,16 @@ abstract class BaseActivity<B : ViewDataBinding, VM : BaseViewModel>() : AppComp
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = DataBindingUtil.setContentView(this, layoutResID)
-        binding.lifecycleOwner = this
+        _binding = DataBindingUtil.setContentView(this, layoutResID)
+        _binding?.lifecycleOwner = this
 
         init()
         initObserver()
-
-
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        if(::binding.isInitialized) binding.unbind()
+        _binding = null
     }
 }
 

@@ -19,10 +19,6 @@ import com.exam.sample.utils.extention.setImageSize
 import com.exam.sample.viewmodel.FavoriteViewModel
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.google.android.material.tabs.TabLayoutMediator
-import kotlinx.android.synthetic.main.activity_favorite.*
-import kotlinx.android.synthetic.main.activity_favorite.appbar
-import kotlinx.android.synthetic.main.activity_favorite.pager
-import kotlinx.android.synthetic.main.top_item_favorite.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 import kotlin.math.abs
@@ -49,10 +45,6 @@ class FavoriteActivity :   BaseActivity<ActivityFavoriteBinding, FavoriteViewMod
     override fun onResume() {
         super.onResume()
 
-        RxEventBus.getObservable().subscribe {
-                if (it == Const.RX_EVENT_REFRESH_FAVORITE)
-                    favoriteFragment.refreshFravoriteList()
-        }
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
@@ -62,22 +54,22 @@ class FavoriteActivity :   BaseActivity<ActivityFavoriteBinding, FavoriteViewMod
         viewPagerAdapter.addFragment(favoriteFragment)
         viewPagerAdapter.addFragment(uploadFragment)
 
-        pager.setPageTransformer(DepthPageTransformer())
-//        pager.setPageTransformer(ZoomOutPageTransformer())
-        pager.adapter = viewPagerAdapter
+        binding.pager.setPageTransformer(DepthPageTransformer())
+//        binding.pager.setPageTransformer(ZoomOutPageTransformer())
+        binding.pager.adapter = viewPagerAdapter
 
-        TabLayoutMediator(binding.tabLayout, pager) { tab, position ->
+        TabLayoutMediator(binding.tabLayout, binding.pager) { tab, position ->
             tab.text = getString(tabTitles[position])
-            pager.setCurrentItem(tab.position, true)
+            binding.pager.setCurrentItem(tab.position, true)
         }.attach()
 
         var beforeVerticalOffset = 0
         var lastSize = 0
-        appbar.addOnOffsetChangedListener(
+        binding.appbar.addOnOffsetChangedListener(
             OnOffsetChangedListener { appBarLayout, verticalOffset ->
-
-                if (collapsing_toolbar.getHeight() + verticalOffset < 2 * ViewCompat.getMinimumHeight(
-                        collapsing_toolbar
+                val imgAvatar = binding.topItemFavoriteLayout.imgAvatar
+                if (binding.collapsingToolbar.getHeight() + verticalOffset < 2 * ViewCompat.getMinimumHeight(
+                        binding.collapsingToolbar
                     )
                 ) {
                     // collapsed

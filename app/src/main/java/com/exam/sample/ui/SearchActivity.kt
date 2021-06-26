@@ -23,7 +23,6 @@ import com.exam.sample.viewmodel.SearchViewModel
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
-import kotlinx.android.synthetic.main.activity_search.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -126,7 +125,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>()
                 }
 
                 override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                    edtSearch.hideKeyboard()
+                    binding.edtSearch.hideKeyboard()
                 }
 
             })
@@ -138,11 +137,11 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>()
     @SuppressLint("CheckResult")
     private fun initEditTextEvent() {
 
-        edtSearch.setOnEditorActionListener(object : TextView.OnEditorActionListener {
+        binding.edtSearch.setOnEditorActionListener(object : TextView.OnEditorActionListener {
             override fun onEditorAction(v: TextView?, actionId: Int, event: KeyEvent?): Boolean {
                 if (actionId == EditorInfo.IME_ACTION_SEARCH) {
                     offset = 0
-                    viewModel.getSearch(edtSearch.text.toString(), offset)
+                    viewModel.getSearch(binding.edtSearch.text.toString(), offset)
                     return true
                 }
                 return false
@@ -165,7 +164,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>()
                 }
             }
 
-        edtSearch.requestFocus()
+        binding.edtSearch.requestFocus()
 
         //Databinding을 사용하지않을 경우 아래 이용
 //        val searchKetTW = SearchKeyTextWatcher()

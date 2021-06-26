@@ -1,9 +1,10 @@
 <resources>
     <string name="app_name">StaggeredSample</string>
     <string name="plusBtnMsg">Plus 버튼입니다.</string>
-    <string name="msgMore">더봅니다.</string>
+    <string name="msgMore">see more.</string>
     <string name="msgSend">Sharing</string>
     <string name="ok">OK</string>
+    <string name="onemoretime">press one more time</string>
     <string name="noFavorites">No favorites</string>
     <string name="detail_middle_msg">Related GIFs</string>
     <string name="tabNameTrending">Trending</string>

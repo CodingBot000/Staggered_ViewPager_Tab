@@ -16,7 +16,7 @@ import kotlin.math.max
 
 
 
-fun <T> Context.startActivityDetailExtras(clazz: Class<T>, it: TrendingDetail) {
+fun <T> Activity.startActivityDetailExtras(clazz: Class<T>, it: TrendingDetail) {
     val intent = Intent(this, clazz)
     intent.putExtra(
         Const.EXTRA_KEY_INTERACTION,
@@ -24,8 +24,31 @@ fun <T> Context.startActivityDetailExtras(clazz: Class<T>, it: TrendingDetail) {
             it.images.downsized.url, it.images.fixed_width_small.url)
     )
     startActivity(intent)
+    openScaleTranslate()
 
 }
+
+
+fun Activity.fadeIn() {
+    overridePendingTransition( R.anim.fade_in, R.anim.fade_out );
+}
+
+fun Activity.slideUp() {
+    overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
+}
+
+fun Activity.openScaleTranslate() {
+    overridePendingTransition(R.anim.open_scale,R.anim.close_translate);
+}
+
+fun Activity.closeScaleTranslate() {
+    overridePendingTransition(R.anim.close_scale,R.anim.open_translate);
+}
+
+fun Activity.slideOutToRight() {
+    overridePendingTransition(R.anim.slide_in_left,R.anim.slide_out_right);
+}
+
 
 fun Activity.circularRevealedAtCenter(view: View) {
     val cx = (view.left + view.right) / 2

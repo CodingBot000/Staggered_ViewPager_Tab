@@ -28,6 +28,7 @@
                 app:layout_scrollFlags="scroll|exitUntilCollapsed"
                 app:collapsedTitleGravity="center_vertical|center_horizontal">
                 <include
+                    android:id = "@+id/topItemFavoriteLayout"
                     layout="@layout/top_item_favorite"
                     android:layout_width="match_parent"
                     android:layout_height="@dimen/top_item_height"

@@ -23,7 +23,6 @@ import com.exam.sample.utils.extention.startActivityDetailExtras
 import com.exam.sample.utils.snackBarSimpleAlert
 import com.exam.sample.utils.toastMsg
 import com.exam.sample.viewmodel.FavoriteViewModel
-import kotlinx.android.synthetic.main.fragment_favorite.*
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 
@@ -38,6 +37,7 @@ class FavoriteFragment() : BaseFragment<FragmentFavoriteBinding, FavoriteViewMod
     private val adapter: StaggeredAdapter by lazy {
         StaggeredAdapter(itemListClick = { item ->
             requireActivity().startActivityDetailExtras(DetailActivity::class.java, item)
+            activity?.finish()
         })
     }
 
@@ -88,7 +88,7 @@ class FavoriteFragment() : BaseFragment<FragmentFavoriteBinding, FavoriteViewMod
                         if (list.isNotEmpty())
                             viewModel.getFavoriteInfoRequest(list)
                         else
-                            snackBarSimpleAlert(R.string.noFavorites, R.string.ok, topBar )
+                            snackBarSimpleAlert(R.string.noFavorites, R.string.ok, binding.topBar )
                     }
 
                     Status.ERROR -> {
