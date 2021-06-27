@@ -7,6 +7,7 @@ import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.TextView
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.exam.sample.R
@@ -20,12 +21,13 @@ import com.exam.sample.utils.*
 import com.exam.sample.utils.extention.hideKeyboard
 import com.exam.sample.utils.extention.startActivityDetailExtras
 import com.exam.sample.viewmodel.SearchViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 import org.koin.android.viewmodel.ext.android.viewModel
 
-
+@AndroidEntryPoint
 class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>()
 {
     override val TAG: String
@@ -33,7 +35,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>()
     override val layoutResID: Int
         get() = R.layout.activity_search
 
-    override val viewModel : SearchViewModel by viewModel()
+    override val viewModel : SearchViewModel by viewModels()
 
     private val adapter: StaggeredAdapter by lazy {
         StaggeredAdapter(itemListClick = { item ->

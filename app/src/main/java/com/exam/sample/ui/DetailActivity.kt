@@ -4,6 +4,7 @@ package com.exam.sample.ui
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import androidx.activity.viewModels
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.room.EmptyResultSetException
 import com.exam.sample.R
@@ -24,9 +25,10 @@ import com.exam.sample.utils.shareUrl
 import com.exam.sample.utils.toastMsg
 import com.exam.sample.viewmodel.DetailViewModel
 import com.google.android.material.snackbar.Snackbar
+import dagger.hilt.android.AndroidEntryPoint
 import org.koin.android.viewmodel.ext.android.viewModel
 
-
+@AndroidEntryPoint
 class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
 {
 
@@ -35,7 +37,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
     override val layoutResID: Int
         get() = R.layout.activity_detail
 
-    override val viewModel : DetailViewModel by viewModel()
+    override val viewModel : DetailViewModel by viewModels()
 
     private val adapter: StaggeredAdapter by lazy {
         StaggeredAdapter(itemListClick = { item ->

@@ -4,6 +4,7 @@ package com.exam.sample.ui
 import android.annotation.SuppressLint
 import android.os.Build
 import android.os.Bundle
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import androidx.core.view.ViewCompat
 import com.exam.sample.R
@@ -19,19 +20,20 @@ import com.exam.sample.utils.extention.setImageSize
 import com.exam.sample.viewmodel.FavoriteViewModel
 import com.google.android.material.appbar.AppBarLayout.OnOffsetChangedListener
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 import org.koin.android.viewmodel.ext.android.viewModel
 
 import kotlin.math.abs
 
 
-
+@AndroidEntryPoint
 class FavoriteActivity :   BaseActivity<ActivityFavoriteBinding, FavoriteViewModel>() {
     override val TAG: String
         get() = this.javaClass.name
     override val layoutResID: Int
         get() = R.layout.activity_favorite
 
-    override val viewModel : FavoriteViewModel by viewModel()
+    override val viewModel : FavoriteViewModel by viewModels()
     private val viewPagerAdapter: ScreenSlideViewPagerAdapter by lazy { ScreenSlideViewPagerAdapter(this) }
     private val favoriteFragment = FavoriteFragment()
     private val uploadFragment = UploadFragment()
