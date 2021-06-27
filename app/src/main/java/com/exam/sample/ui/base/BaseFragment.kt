@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.exam.sample.livedata.RxEventBus
 import com.exam.sample.viewmodel.base.BaseViewModel
 
 abstract class BaseFragment<B : ViewDataBinding?, VM : BaseViewModel>() : Fragment() {
@@ -19,7 +18,7 @@ abstract class BaseFragment<B : ViewDataBinding?, VM : BaseViewModel>() : Fragme
     abstract val layoutResID: Int
     abstract val TAG: String
 
-    abstract fun init()
+    abstract fun initElem()
     abstract fun initObserver()
 
     override fun onCreateView(
@@ -29,7 +28,7 @@ abstract class BaseFragment<B : ViewDataBinding?, VM : BaseViewModel>() : Fragme
     ): View? {
         _binding = DataBindingUtil.inflate(inflater, layoutResID, container, false)
         _binding?.lifecycleOwner = this
-        init()
+        initElem()
         return _binding?.root
     }
 

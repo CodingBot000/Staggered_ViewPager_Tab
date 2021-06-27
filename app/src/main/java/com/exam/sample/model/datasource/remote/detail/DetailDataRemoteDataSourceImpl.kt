@@ -4,9 +4,10 @@ import com.exam.sample.api.ApiService
 import com.exam.sample.model.data.TrendingData
 import com.exam.sample.utils.Const
 import io.reactivex.Single
+import javax.inject.Inject
 
 
-class DetailDataRemoteDataSourceImpl(private val apiService: ApiService) :
+class DetailDataRemoteDataSourceImpl @Inject constructor(private val apiService: ApiService) :
     DetailDataRemoteDataSource {
 
     override fun requestDetailData(id: String): Single<TrendingData> {

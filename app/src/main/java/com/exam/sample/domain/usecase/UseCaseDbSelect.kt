@@ -8,8 +8,9 @@ import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class UseCaseDbSelect (private val favoriteInfoRepository: FavoriteInfoRepository)
+class UseCaseDbSelect  @Inject constructor (private val favoriteInfoRepository: FavoriteInfoRepository)
 : SingleUseCase<FavoriteInfo>() {
 
     private lateinit var userId: String

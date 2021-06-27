@@ -10,9 +10,10 @@ import com.exam.sample.model.repository.search.SearchRepository
 import com.exam.sample.model.repository.trending.TrendingRepository
 
 import io.reactivex.Single
+import javax.inject.Inject
 
 
-class UseCaseGetGIFsByIds (private val favoriteInfoRepository: FavoriteInfoRepository)
+class UseCaseGetGIFsByIds  @Inject constructor (private val favoriteInfoRepository: FavoriteInfoRepository)
 : SingleUseCase<TrendingData>() {
 
 

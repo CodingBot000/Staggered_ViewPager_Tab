@@ -9,9 +9,13 @@ import com.exam.sample.model.data.TrendingData
 import com.exam.sample.utils.Resource
 import com.exam.sample.domain.usecase.UseCaseGetTrendingData
 import com.exam.sample.utils.isNetworkConnected
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
+@HiltViewModel
+class TrendingViewModel @Inject constructor(
+    private val useCaseGetTrendingData: UseCaseGetTrendingData) : BaseViewModel()  {
 
-class TrendingViewModel(private val useCaseGetTrendingData: UseCaseGetTrendingData) : BaseViewModel()  {
     private val _itemLiveData = MutableLiveData<Event<Resource<TrendingData>>>()
     val itemLiveData: LiveData<Event<Resource<TrendingData>>> get() = _itemLiveData
     private val _itemLiveDataAdd = MutableLiveData<Event<Resource<TrendingData>>>()

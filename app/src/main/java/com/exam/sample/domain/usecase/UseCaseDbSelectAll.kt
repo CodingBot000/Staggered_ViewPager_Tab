@@ -8,8 +8,9 @@ import io.reactivex.Completable
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import javax.inject.Inject
 
-class UseCaseDbSelectAll (private val favoriteInfoRepository: FavoriteInfoRepository)
+class UseCaseDbSelectAll  @Inject constructor (private val favoriteInfoRepository: FavoriteInfoRepository)
 : SingleUseCase<List<FavoriteInfo>>() {
 
     override fun buildUseCaseSingle(): Single<List<FavoriteInfo>> {

@@ -12,13 +12,15 @@ import com.exam.sample.utils.Const
 import com.exam.sample.utils.Resource
 import com.exam.sample.utils.isNetworkConnected
 import com.exam.sample.viewmodel.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
+import javax.inject.Inject
 
 
-
-class SearchViewModel(private val useCaseGetSearchData: UseCaseGetSearchData) :  BaseViewModel()  {
+@HiltViewModel
+class SearchViewModel @Inject constructor(private val useCaseGetSearchData: UseCaseGetSearchData) :  BaseViewModel()  {
     private val textChangeSubject = PublishSubject.create<String>()
 
     private val _itemLiveData = MutableLiveData<Event<Resource<TrendingData>>>()

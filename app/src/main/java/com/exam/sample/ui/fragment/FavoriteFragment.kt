@@ -23,9 +23,10 @@ import com.exam.sample.utils.extention.startActivityDetailExtras
 import com.exam.sample.utils.snackBarSimpleAlert
 import com.exam.sample.utils.toastMsg
 import com.exam.sample.viewmodel.FavoriteViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-
+@AndroidEntryPoint
 class FavoriteFragment() : BaseFragment<FragmentFavoriteBinding, FavoriteViewModel>() {
 
     override val TAG: String
@@ -62,7 +63,7 @@ class FavoriteFragment() : BaseFragment<FragmentFavoriteBinding, FavoriteViewMod
         initData()
     }
 
-    override fun init() {
+    override fun initElem() {
         layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.recyclerView.layoutManager = layoutManager

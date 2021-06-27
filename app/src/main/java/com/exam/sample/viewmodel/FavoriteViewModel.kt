@@ -14,10 +14,13 @@ import com.exam.sample.domain.usecase.UseCaseGetGIFsByIds
 import com.exam.sample.utils.Const
 
 import com.exam.sample.utils.Resource
+import dagger.hilt.android.lifecycle.HiltViewModel
 import java.lang.StringBuilder
+import javax.inject.Inject
 
-class FavoriteViewModel(private val useCaseGetGIFsByIds: UseCaseGetGIFsByIds,
-                        private val useCaseDbSelectAll: UseCaseDbSelectAll
+@HiltViewModel
+class FavoriteViewModel @Inject constructor(private val useCaseGetGIFsByIds: UseCaseGetGIFsByIds,
+                                            private val useCaseDbSelectAll: UseCaseDbSelectAll
 ) : BaseViewModel()  {
     private val _dbEvent = MutableLiveData<Event<Resource<DBResultData>>>()
     val dbEvent: LiveData<Event<Resource<DBResultData>>> get() = _dbEvent

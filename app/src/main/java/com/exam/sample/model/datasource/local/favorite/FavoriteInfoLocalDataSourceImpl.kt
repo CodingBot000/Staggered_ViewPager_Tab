@@ -5,8 +5,9 @@ import com.exam.sample.database.FavoriteDao
 import com.exam.sample.model.data.FavoriteInfo
 import io.reactivex.Completable
 import io.reactivex.Single
+import javax.inject.Inject
 
-class FavoriteInfoLocalDataSourceImpl(private val favoriteDao: FavoriteDao) :
+class FavoriteInfoLocalDataSourceImpl @Inject constructor (private val favoriteDao: FavoriteDao) :
     FavoriteInfoLocalDataSource {
 
     override fun getInfo(userId : String) : Single<FavoriteInfo> {

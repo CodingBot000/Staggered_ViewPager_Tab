@@ -6,7 +6,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
-import com.exam.sample.livedata.RxEventBus
 import com.exam.sample.viewmodel.base.BaseViewModel
 
 abstract class BaseActivity<B : ViewDataBinding?, VM : BaseViewModel>() : AppCompatActivity() {
@@ -17,7 +16,7 @@ abstract class BaseActivity<B : ViewDataBinding?, VM : BaseViewModel>() : AppCom
     abstract val layoutResID: Int
     abstract val TAG: String
 
-    abstract fun init()
+    abstract fun initElem()
     abstract fun initObserver()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -26,7 +25,7 @@ abstract class BaseActivity<B : ViewDataBinding?, VM : BaseViewModel>() : AppCom
         _binding = DataBindingUtil.setContentView(this, layoutResID)
         _binding?.lifecycleOwner = this
 
-        init()
+        initElem()
         initObserver()
     }
 

@@ -64,7 +64,7 @@ class DetailActivity : BaseActivity<ActivityDetailBinding, DetailViewModel>()
         binding.interactionData = interactionData
     }
 
-    override fun init() {
+    override fun initElem() {
         getIntentData()
         layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)

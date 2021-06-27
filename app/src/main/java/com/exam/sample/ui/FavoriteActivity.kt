@@ -48,7 +48,7 @@ class FavoriteActivity :   BaseActivity<ActivityFavoriteBinding, FavoriteViewMod
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    override fun init() {
+    override fun initElem() {
         val tabTitles = arrayListOf(R.string.tabNameFavorite, R.string.tabNameUpload)
 
         viewPagerAdapter.addFragment(favoriteFragment)

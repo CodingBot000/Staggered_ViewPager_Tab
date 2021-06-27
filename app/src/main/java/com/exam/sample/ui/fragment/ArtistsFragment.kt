@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
@@ -22,16 +23,17 @@ import com.exam.sample.utils.*
 import com.exam.sample.utils.extention.hideKeyboard
 import com.exam.sample.utils.extention.startActivityDetailExtras
 import com.exam.sample.viewmodel.ArtistsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import org.koin.android.viewmodel.ext.android.viewModel
 
-
+@AndroidEntryPoint
 class ArtistsFragment  : BaseFragment<FragmentArtistsBinding, ArtistsViewModel>(), SwipeRefreshLayout.OnRefreshListener {
     override val TAG: String
         get() = this.javaClass.name
     override val layoutResID: Int
         get() = R.layout.fragment_artists
 
-    override val viewModel : ArtistsViewModel by viewModel()
+    override val viewModel : ArtistsViewModel by viewModels()
 
     private val adapter: StaggeredAdapter by lazy {
         StaggeredAdapter(itemListClick = { item ->
@@ -60,7 +62,7 @@ class ArtistsFragment  : BaseFragment<FragmentArtistsBinding, ArtistsViewModel>(
         return binding.root
     }
 
-    override fun init() {
+    override fun initElem() {
         binding.swipeLayout.setOnRefreshListener(this)
         layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)

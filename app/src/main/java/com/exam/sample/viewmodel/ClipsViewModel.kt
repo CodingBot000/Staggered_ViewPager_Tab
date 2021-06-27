@@ -11,9 +11,11 @@ import com.exam.sample.model.data.TrendingData
 import com.exam.sample.utils.Resource
 import com.exam.sample.utils.isNetworkConnected
 import com.exam.sample.viewmodel.base.BaseViewModel
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-
-class ClipsViewModel (private val useCaseGetSearchData: UseCaseGetSearchData) :  BaseViewModel()  {
+@HiltViewModel
+class ClipsViewModel @Inject constructor (private val useCaseGetSearchData: UseCaseGetSearchData) :  BaseViewModel()  {
 
     private val _itemLiveData = MutableLiveData<Event<Resource<TrendingData>>>()
     val itemLiveData: LiveData<Event<Resource<TrendingData>>> get() = _itemLiveData

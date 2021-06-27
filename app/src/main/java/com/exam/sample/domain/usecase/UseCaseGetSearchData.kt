@@ -9,9 +9,10 @@ import com.exam.sample.model.repository.search.SearchRepository
 import com.exam.sample.model.repository.trending.TrendingRepository
 
 import io.reactivex.Single
+import javax.inject.Inject
 
 
-class UseCaseGetSearchData (private val searchRepository: SearchRepository)
+class UseCaseGetSearchData @Inject constructor (private val searchRepository: SearchRepository)
 : SingleUseCase<TrendingData>() {
 
     private var offset: Int = 0

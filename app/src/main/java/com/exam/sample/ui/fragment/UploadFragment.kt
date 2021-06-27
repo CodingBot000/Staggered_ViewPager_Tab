@@ -12,10 +12,11 @@ import com.exam.sample.ui.base.BaseFragment
 
 import com.exam.sample.databinding.FragmentUploadBinding
 import com.exam.sample.viewmodel.FavoriteViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
-
+@AndroidEntryPoint
 class UploadFragment() : BaseFragment<FragmentUploadBinding, FavoriteViewModel>() {
     override val TAG: String
         get() = this.javaClass.name
@@ -39,7 +40,7 @@ class UploadFragment() : BaseFragment<FragmentUploadBinding, FavoriteViewModel>(
 
     }
 
-    override fun init() {
+    override fun initElem() {
 
     }
 

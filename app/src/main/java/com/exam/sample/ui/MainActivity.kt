@@ -4,6 +4,7 @@ import android.content.Intent
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.annotation.RequiresApi
 import com.exam.sample.R
 import com.exam.sample.adapter.ScreenSlideViewPagerAdapter
@@ -18,16 +19,17 @@ import com.exam.sample.utils.toastMsg
 import com.exam.sample.viewmodel.MainViewModel
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
+import dagger.hilt.android.AndroidEntryPoint
 import org.koin.android.viewmodel.ext.android.viewModel
 
-
+@AndroidEntryPoint
 class MainActivity :  BaseActivity<ActivityMainBinding, MainViewModel>() {
     override val TAG: String
         get() = this.javaClass.name
     override val layoutResID: Int
         get() = R.layout.activity_main
 
-    override val viewModel : MainViewModel by viewModel()
+    override val viewModel : MainViewModel by viewModels()
     private val viewPagerAdapter: ScreenSlideViewPagerAdapter by lazy { ScreenSlideViewPagerAdapter(this) }
 
     private val trendingFragment = TrendingFragment()
@@ -45,7 +47,7 @@ class MainActivity :  BaseActivity<ActivityMainBinding, MainViewModel>() {
     }
 
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
-    override fun init() {
+    override fun initElem() {
         getScreenSize()
 
         viewPagerAdapter.addFragment(trendingFragment)

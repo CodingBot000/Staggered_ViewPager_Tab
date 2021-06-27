@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -21,15 +22,16 @@ import com.exam.sample.utils.extention.startActivityDetailExtras
 import org.koin.android.viewmodel.ext.android.viewModel
 
 import com.exam.sample.viewmodel.TrendingViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class TrendingFragment  : BaseFragment<FragmentTrendingBinding, TrendingViewModel>(), SwipeRefreshLayout.OnRefreshListener {
     override val TAG: String
         get() = this.javaClass.name
     override val layoutResID: Int
         get() = R.layout.fragment_trending
 
-    override val viewModel : TrendingViewModel by viewModel()
+    override val viewModel : TrendingViewModel by viewModels()
 
     private val adapter: StaggeredAdapter by lazy {
         StaggeredAdapter(itemListClick = { item ->
@@ -56,7 +58,7 @@ class TrendingFragment  : BaseFragment<FragmentTrendingBinding, TrendingViewMode
         return binding.root
     }
 
-    override fun init() {
+    override fun initElem() {
         binding.swipeLayout.setOnRefreshListener(this)
         // by lazy로 변수정의와 함께 할당할 경우 열어 탭을 오고가면 already attached오류 발생합니다.
         layoutManager =
@@ -114,9 +116,6 @@ class TrendingFragment  : BaseFragment<FragmentTrendingBinding, TrendingViewMode
                     }
                 }
             })
-
-
-
         }
     }
 

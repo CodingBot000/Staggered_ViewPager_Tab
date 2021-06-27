@@ -6,9 +6,12 @@ import com.exam.sample.model.data.TrendingData
 import com.exam.sample.domain.usecase.UseCaseGetTrendingData
 
 import com.exam.sample.utils.isNetworkConnected
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-
-class MainViewModel(private val useCaseGetTrendingData: UseCaseGetTrendingData) : BaseViewModel()  {
+@HiltViewModel
+class MainViewModel @Inject constructor(
+    private val useCaseGetTrendingData: UseCaseGetTrendingData) : BaseViewModel()  {
 
     interface ServiceListener {
         fun listenerFromService(data : TrendingData)

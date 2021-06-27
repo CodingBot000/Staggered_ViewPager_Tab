@@ -18,11 +18,12 @@ import com.exam.sample.service.WorkerDataChangeMonitor
 import com.exam.sample.utils.Const
 import com.exam.sample.utils.isServiceRunning
 import com.facebook.stetho.Stetho
+import dagger.hilt.android.HiltAndroidApp
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 import java.util.concurrent.TimeUnit
 
-
+@HiltAndroidApp
 class App : MultiDexApplication() {
     companion object {
         private lateinit var sApplication: Application
@@ -44,10 +45,10 @@ class App : MultiDexApplication() {
         super.onCreate();
         Stetho.initializeWithDefaults(this)
         sApplication = this;
-        startKoin {
-            androidContext(this@App)
-            modules(listOf(networkModule, repoModule, useCaseModule, remoteDataModule, localDataModule, viewModelModule))
-        }
+//        startKoin {
+//            androidContext(this@App)
+//            modules(listOf(networkModule, repoModule, useCaseModule, remoteDataModule, localDataModule, viewModelModule))
+//        }
 
         val serviceIntent by lazy {
             Intent(this, ServiceDataChangeObserver::class.java)
@@ -86,15 +87,15 @@ class App : MultiDexApplication() {
     }
 
     private fun doWorkPeriodic() {
-        val constraints = Constraints.Builder()
-            .setRequiresBatteryNotLow(true)
-            .setRequiredNetworkType(NetworkType.CONNECTED)
-            .build()
-
-        val workRequest = PeriodicWorkRequestBuilder<WorkerDataChangeMonitor>(15, TimeUnit.MINUTES).build()
-        PeriodicWorkRequest.Builder(WorkerDataChangeMonitor::class.java, PeriodicWorkRequest.MIN_PERIODIC_INTERVAL_MILLIS, TimeUnit.MINUTES)
-            .setConstraints(constraints).build()
-
-        WorkManager.getInstance()?.enqueueUniquePeriodicWork(Const.WORKER_TAG, ExistingPeriodicWorkPolicy.REPLACE, workRequest);
+//        val constraints = Constraints.Builder()
+//            .setRequiresBatteryNotLow(true)
+//            .setRequiredNetworkType(NetworkType.CONNECTED)
+//            .build()
+//
+//        val workRequest = PeriodicWorkRequestBuilder<WorkerDataChangeMonitor>(15, TimeUnit.MINUTES).build()
+//        PeriodicWorkRequest.Builder(WorkerDataChangeMonitor::class.java, PeriodicWorkRequest.MIN_PERIODIC_INTERVAL_MILLIS, TimeUnit.MINUTES)
+//            .setConstraints(constraints).build()
+//
+//        WorkManager.getInstance()?.enqueueUniquePeriodicWork(Const.WORKER_TAG, ExistingPeriodicWorkPolicy.REPLACE, workRequest);
     }
 }

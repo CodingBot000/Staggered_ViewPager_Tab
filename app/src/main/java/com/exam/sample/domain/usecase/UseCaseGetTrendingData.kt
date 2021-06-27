@@ -8,9 +8,10 @@ import com.exam.sample.model.repository.detail.DetailDataRepository
 import com.exam.sample.model.repository.trending.TrendingRepository
 
 import io.reactivex.Single
+import javax.inject.Inject
 
 
-class UseCaseGetTrendingData (private val trendingRepository: TrendingRepository)
+class UseCaseGetTrendingData @Inject constructor(private val trendingRepository: TrendingRepository)
 : SingleUseCase<TrendingData>() {
 
     private var offset: Int = 0

@@ -15,9 +15,12 @@ import com.exam.sample.utils.Const
 
 import com.exam.sample.utils.Resource
 import com.exam.sample.utils.isNetworkConnected
+import dagger.hilt.android.lifecycle.HiltViewModel
+import javax.inject.Inject
 
-
-class DetailViewModel(private val useCaseDbSelect: UseCaseDbSelect,
+@HiltViewModel
+class DetailViewModel @Inject constructor
+                     (private val useCaseDbSelect: UseCaseDbSelect,
                       private val useCaseDbRemove: UseCaseDbRemove,
                       private val useCaseDbInsert: UseCaseDbInsert,
                       private val useCaseGetDetailData: UseCaseGetDetailData

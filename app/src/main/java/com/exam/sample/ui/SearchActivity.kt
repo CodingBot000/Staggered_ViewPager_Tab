@@ -58,7 +58,7 @@ class SearchActivity : BaseActivity<ActivitySearchBinding, SearchViewModel>()
 
 
 
-    override fun init() {
+    override fun initElem() {
         layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
         binding.recyclerView.layoutManager = layoutManager

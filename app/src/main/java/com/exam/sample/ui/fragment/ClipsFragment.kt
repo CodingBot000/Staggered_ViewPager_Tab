@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
@@ -19,16 +20,17 @@ import com.exam.sample.ui.DetailActivity
 import com.exam.sample.utils.*
 import com.exam.sample.utils.extention.startActivityDetailExtras
 import com.exam.sample.viewmodel.ClipsViewModel
+import dagger.hilt.android.AndroidEntryPoint
 import org.koin.android.viewmodel.ext.android.viewModel
 
-
+@AndroidEntryPoint
 class ClipsFragment  : BaseFragment<FragmentClipsBinding, ClipsViewModel>(), SwipeRefreshLayout.OnRefreshListener {
     override val TAG: String
         get() = this.javaClass.name
     override val layoutResID: Int
         get() = R.layout.fragment_clips
 
-    override val viewModel : ClipsViewModel by viewModel()
+    override val viewModel : ClipsViewModel by viewModels()
 
     private val adapter: StaggeredAdapter by lazy {
         StaggeredAdapter(itemListClick = { item ->
@@ -57,7 +59,7 @@ class ClipsFragment  : BaseFragment<FragmentClipsBinding, ClipsViewModel>(), Swi
         return binding.root
     }
 
-    override fun init() {
+    override fun initElem() {
         binding.swipeLayout.setOnRefreshListener(this)
         layoutManager =
             StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL)
