@@ -3,6 +3,9 @@ package com.exam.sample.model.repository.favorite
 import androidx.lifecycle.LiveData
 import com.exam.sample.model.data.FavoriteInfo
 import com.exam.sample.model.data.TrendingData
+import dagger.hilt.EntryPoint
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import io.reactivex.Completable
 
 import io.reactivex.Single
